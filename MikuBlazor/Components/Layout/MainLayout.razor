@@ -1,0 +1,183 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudMenu Dense
+                 Variant="Variant.Text"
+                 Size="Size.Medium"
+                 Color="Color.Inherit"
+                 Icon="@Icons.Material.TwoTone.MoreVert">
+            <MudMenu StartIcon="@Icons.Material.TwoTone.Settings"
+                     IconColor="Color.Primary"
+                     Label="Settings">
+                <MudMenuItem Icon="@Icons.Material.TwoTone.DarkMode"
+                             IconColor="Color.Secondary"
+                             Label="Dark Theme"/>
+                <MudDivider />
+
+                <MudMenuItem Href="/"
+                             ForceLoad
+                             Icon="@Icons.Material.TwoTone.Login"
+                             IconColor="Color.Primary"
+                             Label="Sign In" />
+
+                <MudMenuItem Href="/"
+                             ForceLoad
+                             Icon="@Icons.Material.TwoTone.Logout"
+                             IconColor="Color.Primary"
+                             Label="Sign Out" />
+            </MudMenu>
+        </MudMenu>
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <NavMenu/>
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large">
+            <MudTabs Elevation="2" Rounded="true" Centered="true" Class="my-2" Color="Color.Dark">
+                <MudTabPanel Icon="@Icons.Material.Filled.Home" Text="Overview">
+                    <MudGrid>
+                        @* Profile *@
+                        <MudItem xs="6">
+                            <MudPaper Class="pa-4 ma-2" Outlined="true" Square="true" Style="height: 100%">
+                                <div class="d-flex" style="height: 100%">
+                                    @* Left *@
+                                    <div>
+                                        @* Profile Name *@
+                                        <MudText Typo="Typo.h6" Class="mb-4">Ashley's Profile</MudText>
+                                        
+                                        @* Profile Picture *@
+                                        <MudImage Src="images/miku.jpg" Alt="Profile Picture" Height="225" Class="mud-paper-outlined" ObjectPosition="ObjectPosition.Left"/>
+
+                                        @* Profile Buttons *@
+                                        <div class="ml-4 mt-1">
+                                            <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined">
+                                                <MudToggleIconButton Icon="@Icons.Material.Outlined.WavingHand" Color="@Color.Primary"
+                                                                     ToggledIcon="@Icons.Material.Filled.WavingHand" ToggledColor="@Color.Success"/>
+                                                <MudToggleIconButton Icon="@Icons.Material.Outlined.Email" Color="@Color.Primary"
+                                                                     ToggledIcon="@Icons.Material.Filled.Email" ToggledColor="@Color.Success"/>
+                                                <MudToggleIconButton Icon="@Icons.Material.Filled.PersonAddAlt" Color="Color.Primary"
+                                                                     ToggledIcon="@Icons.Material.Filled.PersonAddAlt1" ToggledColor="Color.Success"></MudToggleIconButton>
+                                            </MudButtonGroup>
+                                        </div>
+
+                                        @* Profile About *@
+                                        <div>
+                                            <MudSimpleTable Hover="true" Dense="true" Bordered="false" Striped="true" Square="true" Elevation="0">
+                                                <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td><b>Last Online</b></td>
+                                                    <td>Feb 19, 2:28 PM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Location</b></td>
+                                                    <td>United Kingdom</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Birthday</b></td>
+                                                    <td>Jun 30, 1997</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Joined</b></td>
+                                                    <td>April 12, 2011</td>
+                                                </tr>
+                                                </tbody>
+                                            </MudSimpleTable>
+
+                                            @* List Buttons *@
+                                            <div class="mt-2">
+                                                <MudButton Variant="Variant.Filled" Color="Color.Primary">Anime List</MudButton>
+                                                <MudButton Variant="Variant.Filled" Color="Color.Primary">Manga List</MudButton>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    @* Divider *@
+                                    <MudDivider Vertical="true" FlexItem="true" Class="ml-4"></MudDivider>
+                                    @* Right *@
+                                    <div class="mx-4">
+                                        <MudList T="string">
+                                            <MudListSubheader>Anime Stats</MudListSubheader>
+                                            <MudListItem Text="Completed" Icon="@Icons.Material.Filled.Circle" IconColor="Color.Primary"/>
+                                            <MudListItem Text="Watching" Icon="@Icons.Material.Filled.Circle" IconColor="Color.Secondary"/>
+                                            <MudListItem Text="On-Hold" Icon="@Icons.Material.Filled.Circle" IconColor="Color.Warning"/>
+                                            <MudListItem Text="Dropped" Icon="@Icons.Material.Filled.Circle" IconColor="Color.Error"/>
+                                            <MudListItem Text="Plan to Watch" Icon="@Icons.Material.Filled.Circle" IconColor="Color.Info"/>
+                                        </MudList>
+                                    </div>
+                                </div>
+                            </MudPaper>
+                        </MudItem>
+                        @* Anime Updates *@
+                        <MudItem xs="6">
+                            <MudPaper Class="pa-4 ma-2" Outlined="true" Square="true" Style="height: 100%">
+                                <MudList T="string">
+                                    <MudListSubheader>Latest updates</MudListSubheader>
+                                    <MudListItem>
+                                        <AvatarContent>
+                                            <MudImage Src="images/frieren.jpg" Height="75" ObjectFit="ObjectFit.Contain"></MudImage>
+                                        </AvatarContent>
+                                        <ChildContent>
+                                            <MudText Class="mx-5">Sousou no Frieren</MudText>
+                                            <MudProgressLinear Color="Color.Primary" Size="Size.Medium" Value="50" Class="my-2 mx-5 pr-5"/>
+                                            <MudText Class="mx-5">Watching 5 / 30</MudText>
+                                        </ChildContent>
+                                    </MudListItem>
+                                    <MudListItem>
+                                        <AvatarContent>
+                                            <MudImage Src="images/spice.jpg" Height="75" ObjectFit="ObjectFit.Contain"></MudImage>
+                                        </AvatarContent>
+                                        <ChildContent>
+                                            <MudText Class="mx-5">Spice and Wolf</MudText>
+                                            <MudProgressLinear Color="Color.Primary" Size="Size.Medium" Value="50" Class="my-2 mx-5 pr-5"/>
+                                            <MudText Class="mx-5">Watching 10 / 30</MudText>
+                                        </ChildContent>
+                                    </MudListItem>
+                                    <MudListItem>
+                                        <AvatarContent>
+                                            <MudImage Src="images/silentvoice.jpg" Height="75" ObjectFit="ObjectFit.Contain"></MudImage>
+                                        </AvatarContent>
+                                        <ChildContent>
+                                            <MudText Class="mx-5">Silent Voice</MudText>
+                                            <MudProgressLinear Color="Color.Primary" Size="Size.Medium" Value="50" Class="my-2 mx-5 pr-5"/>
+                                            <MudText Class="mx-5">Watching 2 / 30</MudText>
+                                        </ChildContent>
+                                    </MudListItem>
+                                </MudList>
+                            </MudPaper>
+                        </MudItem>
+                        <MudItem xs="6">
+
+                        </MudItem>
+                    </MudGrid>
+                </MudTabPanel>
+                <MudTabPanel Icon="@Icons.Material.Filled.MovieFilter" Text="Anime" BadgeData="99" BadgeColor="Color.Success" />
+                <MudTabPanel Icon="@Icons.Material.Filled.MenuBook" Text="Manga" BadgeData="25" BadgeColor="Color.Info" />
+                <MudTabPanel Icon="@Icons.Material.Filled.LibraryMusic" Text="Music" BadgeData="100" BadgeColor="Color.Error" />
+                <MudTabPanel Icon="@Icons.Material.Filled.TagFaces" Text="Social" BadgeData="7" BadgeColor="Color.Tertiary" />
+            </MudTabs>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool _drawerOpen = false;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
