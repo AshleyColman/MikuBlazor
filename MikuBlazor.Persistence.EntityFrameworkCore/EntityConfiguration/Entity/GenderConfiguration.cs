@@ -1,0 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MikuBlazor.Domain.Anime.Entity;
+
+namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
+
+public sealed class GenderConfiguration : EntityConfiguration<Gender>
+{
+    protected override void ConfigureEntity(EntityTypeBuilder<Gender> builder)
+    {
+        builder.ToTable(name: "Genders", schema: "App");
+    }
+}

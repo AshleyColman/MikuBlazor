@@ -21,7 +21,7 @@ public static class ServiceCollectionExtensions
                    .LogTo(Console.Write);
         });
 
-        services.TryAddScoped<IAnimeRepository, AnimeRepository>();
+        // services.TryAddScoped<IAnimeRepository, AnimeRepository>();
         
         return services;
     }
