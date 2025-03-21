@@ -16,10 +16,14 @@ public sealed class Anime : Entity
     public required Guid ProducerId { get; set; }
     public required Guid StudioId { get; set; }
     public required Guid SeasonId { get; set; }
+    public required Guid GenreId { get; set; }
+    public required Guid ViewerRatingId { get; set; }
     
     public Status Status { get; set; } = null!;
     public Type Type { get; set; } = null!;
     public IList<Producer> Producers { get; set; } = [];
     public IList<Studio> Studios { get; set; } = [];
     public Season Season { get; set; } = null!;
+    public IList<Genre> Genres { get; set; } = [];
+    public ViewerRating ViewerRating { get; set; } = null!;
 }
