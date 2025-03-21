@@ -10,6 +10,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{E00912
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikuBlazor.Domain", "MikuBlazor.Domain\MikuBlazor.Domain.csproj", "{09AB639B-11B6-430A-99A9-4EE92BEDFE0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikuBlazor.Persistence.EntityFrameworkCore", "MikuBlazor.Persistence.EntityFrameworkCore\MikuBlazor.Persistence.EntityFrameworkCore.csproj", "{18084F8E-698B-4E12-A5B5-75AA5250C971}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{BCDC855A-A22D-4B06-B01F-FDD3021E7353}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikuBlazor.Interfaces", "MikuBlazor.Interfaces\MikuBlazor.Interfaces.csproj", "{8E84FB0B-D82E-4800-B29A-D947805AC597}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,9 +30,19 @@ Global
 		{09AB639B-11B6-430A-99A9-4EE92BEDFE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09AB639B-11B6-430A-99A9-4EE92BEDFE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09AB639B-11B6-430A-99A9-4EE92BEDFE0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18084F8E-698B-4E12-A5B5-75AA5250C971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18084F8E-698B-4E12-A5B5-75AA5250C971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18084F8E-698B-4E12-A5B5-75AA5250C971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18084F8E-698B-4E12-A5B5-75AA5250C971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E84FB0B-D82E-4800-B29A-D947805AC597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E84FB0B-D82E-4800-B29A-D947805AC597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E84FB0B-D82E-4800-B29A-D947805AC597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E84FB0B-D82E-4800-B29A-D947805AC597}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{764F358B-0D26-4734-854B-839E68716AA8} = {45A2318E-4247-4811-8BD6-89C79C6367CA}
 		{09AB639B-11B6-430A-99A9-4EE92BEDFE0B} = {E00912E1-08B2-436C-B626-0F3B5A25F41E}
+		{18084F8E-698B-4E12-A5B5-75AA5250C971} = {BBB6D69C-47D7-44E8-A5E7-09A0B756DD36}
+		{8E84FB0B-D82E-4800-B29A-D947805AC597} = {BCDC855A-A22D-4B06-B01F-FDD3021E7353}
 	EndGlobalSection
 EndGlobal
