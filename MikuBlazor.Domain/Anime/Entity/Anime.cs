@@ -20,7 +20,7 @@ public sealed class Anime : Entity
     public required Guid ViewerRatingId { get; set; }
     
     public AnimeStatus Status { get; set; } = null!;
-    public Type Type { get; set; } = null!;
+    public AnimeType Type { get; set; } = null!;
     public IList<Producer> Producers { get; set; } = [];
     public IList<Studio> Studios { get; set; } = [];
     public Season Season { get; set; } = null!;
