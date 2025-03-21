@@ -9,5 +9,8 @@ public sealed class UserConfiguration : EntityConfiguration<User>
     protected override void ConfigureEntity(EntityTypeBuilder<User> builder)
     {
         builder.ToTable(name: "Users", schema: "App");
+        
+        builder.Property(x => x.Username)
+               .HasMaxLength(25);
     }
 }

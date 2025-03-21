@@ -9,5 +9,8 @@ public sealed class StudioConfiguration : EntityConfiguration<Studio>
     protected override void ConfigureEntity(EntityTypeBuilder<Studio> builder)
     {
         builder.ToTable(name: "Studios", schema: "App");
+        
+        builder.Property(x => x.Name)
+               .HasMaxLength(50);
     }
 }

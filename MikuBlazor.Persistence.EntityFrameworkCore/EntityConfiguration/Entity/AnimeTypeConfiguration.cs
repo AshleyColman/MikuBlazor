@@ -9,5 +9,8 @@ public sealed class AnimeTypeConfiguration : EntityConfiguration<AnimeType>
     protected override void ConfigureEntity(EntityTypeBuilder<AnimeType> builder)
     {
         builder.ToTable(name: "AnimeTypes", schema: "App");
+        
+        builder.Property(x => x.Name)
+               .HasMaxLength(50);
     }
 }

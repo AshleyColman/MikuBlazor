@@ -32,5 +32,5 @@ public sealed class Anime : Entity
     public IList<Tag> Tags { get; set; } = [];
     public IList<UserAnimeFavourites> UserAnimeFavourites { get; set; } = [];
     public IList<UserAnimeRatings> UserAnimeRatings { get; set; } = [];
-    public IList<UserCharacterFavourites> UserCharacterFavourites { get; set; } = [];
+    public IList<UserCharacterFavourites> UserCharacterFavouritesList { get; set; } = [];
 }

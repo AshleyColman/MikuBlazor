@@ -9,5 +9,8 @@ public sealed class GenderConfiguration : EntityConfiguration<Gender>
     protected override void ConfigureEntity(EntityTypeBuilder<Gender> builder)
     {
         builder.ToTable(name: "Genders", schema: "App");
+        
+        builder.Property(x => x.Name)
+               .HasMaxLength(25);
     }
 }

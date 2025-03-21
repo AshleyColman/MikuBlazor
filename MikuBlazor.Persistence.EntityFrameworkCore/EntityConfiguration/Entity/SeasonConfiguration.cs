@@ -9,5 +9,8 @@ internal sealed class SeasonConfiguration : EntityConfiguration<Season>
     protected override void ConfigureEntity(EntityTypeBuilder<Season> builder)
     {
         builder.ToTable(name: "Seasons", schema: "App");
+        
+        builder.Property(x => x.Name)
+               .HasMaxLength(25);
     }
 }

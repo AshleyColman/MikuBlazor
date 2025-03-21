@@ -9,5 +9,8 @@ public sealed class ViewerRatingConfiguration : EntityConfiguration<ViewerRating
     protected override void ConfigureEntity(EntityTypeBuilder<ViewerRating> builder)
     {
         builder.ToTable(name: "ViewerRatings", schema: "App");
+        
+        builder.Property(x => x.Name)
+               .HasMaxLength(25);
     }
 }

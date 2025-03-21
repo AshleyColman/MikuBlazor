@@ -9,5 +9,8 @@ public sealed class ProducerConfiguration : EntityConfiguration<Producer>
     protected override void ConfigureEntity(EntityTypeBuilder<Producer> builder)
     {
         builder.ToTable(name: "Producers", schema: "App");
+        
+        builder.Property(x => x.Name)
+               .HasMaxLength(50);
     }
 }

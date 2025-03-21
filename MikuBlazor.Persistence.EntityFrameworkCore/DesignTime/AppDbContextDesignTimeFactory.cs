@@ -11,7 +11,7 @@ public class AppDbContextDesignTimeFactory : IDesignTimeDbContextFactory<AppDbCo
         var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
         
         // TODO: Move this to args
-        optionsBuilder.UseSqlServer("Server=localhost;Database=MikuBlazor;Trusted_Connection=True;Integrated Security=True;")
+        optionsBuilder.UseSqlServer("Server=localhost;Database=MikuBlazor;Trusted_Connection=True;Integrated Security=True;TrustServerCertificate=True;")
                       .EnableSensitiveDataLogging()
                       .LogTo(Console.Write);
 

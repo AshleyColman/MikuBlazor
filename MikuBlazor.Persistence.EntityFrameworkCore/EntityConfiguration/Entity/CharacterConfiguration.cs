@@ -10,6 +10,24 @@ public sealed class CharacterConfiguration : EntityConfiguration<Character>
     {
         builder.ToTable(name: "Characters", schema: "App");
 
+        builder.Property(x => x.FirstName)
+               .HasMaxLength(50);
+        
+        builder.Property(x => x.LastName)
+               .HasMaxLength(50);
+        
+        builder.Property(x => x.JapaneseName)
+               .HasMaxLength(250);
+        
+        builder.Property(x => x.NickName)
+               .HasMaxLength(50);
+        
+        builder.Property(x => x.Description)
+               .HasMaxLength(2500);
+        
+        builder.Property(x => x.ImageUri)
+               .HasMaxLength(4000);
+        
         builder.HasOne<Gender>(c => c.Gender)
                .WithMany(g => g.Characters)
                .HasForeignKey(c => c.GenderId);
