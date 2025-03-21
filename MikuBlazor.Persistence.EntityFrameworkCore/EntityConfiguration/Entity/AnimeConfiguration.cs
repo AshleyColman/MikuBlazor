@@ -38,5 +38,13 @@ public sealed class AnimeConfiguration : EntityConfiguration<Anime>
         builder.HasOne<ViewerRating>(a => a.ViewerRating)
                .WithMany(vr => vr.Animes)
                .HasForeignKey(a => a.ViewerRatingId);
+        
+        builder.HasMany<Character>(a => a.Characters)
+               .WithMany(s => s.Animes)
+               .UsingEntity<AnimeCharacters>();
+        
+        builder.HasMany<Tag>(a => a.Tags)
+               .WithMany(s => s.Animes)
+               .UsingEntity<AnimeTags>();
     }
 }

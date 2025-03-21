@@ -1,5 +1,7 @@
 
 
+using MikuBlazor.Domain.Anime.JoinEntity;
+
 namespace MikuBlazor.Domain.Anime.Entity;
 
 public sealed class Anime : Entity
@@ -26,4 +28,9 @@ public sealed class Anime : Entity
     public Season Season { get; set; } = null!;
     public IList<Genre> Genres { get; set; } = [];
     public ViewerRating ViewerRating { get; set; } = null!;
+    public IList<Character> Characters { get; set; } = [];
+    public IList<Tag> Tags { get; set; } = [];
+    public IList<UserAnimeFavourites> UserAnimeFavourites { get; set; } = [];
+    public IList<UserAnimeRatings> UserAnimeRatings { get; set; } = [];
+    public IList<UserCharacterFavourites> UserCharacterFavourites { get; set; } = [];
 }

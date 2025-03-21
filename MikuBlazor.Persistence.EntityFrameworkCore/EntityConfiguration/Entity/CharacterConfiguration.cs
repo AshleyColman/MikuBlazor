@@ -9,5 +9,9 @@ public sealed class CharacterConfiguration : EntityConfiguration<Character>
     protected override void ConfigureEntity(EntityTypeBuilder<Character> builder)
     {
         builder.ToTable(name: "Characters", schema: "App");
+
+        builder.HasOne<Gender>(c => c.Gender)
+               .WithMany(g => g.Characters)
+               .HasForeignKey(c => c.GenderId);
     }
 }
