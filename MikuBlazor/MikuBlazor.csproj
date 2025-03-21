@@ -7,6 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="14.0.0" />
+      <PackageReference Include="MediatR" Version="12.4.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
       <PackageReference Include="MudBlazor" Version="8.2.0" />
@@ -18,6 +20,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\MikuBlazor.Application\MikuBlazor.Application.csproj" />
+      <ProjectReference Include="..\MikuBlazor.DTO\MikuBlazor.DTO.csproj" />
       <ProjectReference Include="..\MikuBlazor.Persistence.EntityFrameworkCore\MikuBlazor.Persistence.EntityFrameworkCore.csproj" />
     </ItemGroup>
 

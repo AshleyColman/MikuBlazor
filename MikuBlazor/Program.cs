@@ -1,3 +1,4 @@
+using MikuBlazor.Application.Extensions;
 using MikuBlazor.Components;
 using MikuBlazor.Persistence.EntityFrameworkCore.Extensions;
 using MudBlazor.Services;
@@ -10,6 +11,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddMudServices();
 builder.Services.AddEntityFrameworkServices(builder.Configuration);
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
