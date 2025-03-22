@@ -2,6 +2,7 @@ namespace MikuBlazor.DTO.Requests;
 
 public sealed class AnimeResponse
 {
+    public Guid Id { get; set; }
     public required string Title { get; set; } = null!;
     public required string JapaneseTitle { get; set; } = null!;
     public required byte Rating { get; set; }

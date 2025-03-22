@@ -1,6 +1,6 @@
 namespace MikuBlazor.Domain.Anime.JoinEntity;
 
-public sealed class ProducerAnimes : Entity.Entity
+public sealed class AnimeProducers : Entity.Entity
 {
     public required Guid ProducerId { get; set; }
     public required Guid AnimeId { get; set; }

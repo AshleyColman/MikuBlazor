@@ -5,10 +5,10 @@ using MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.JoinEntity;
 
-public sealed class ProducerAnimesConfiguration : EntityConfiguration<ProducerAnimes>
+public sealed class AnimeProducersConfiguration : EntityConfiguration<AnimeProducers>
 {
-    protected override void ConfigureEntity(EntityTypeBuilder<ProducerAnimes> builder)
+    protected override void ConfigureEntity(EntityTypeBuilder<AnimeProducers> builder)
     {
-        builder.ToTable(name: "ProducerAnimes", schema: "App");
+        builder.ToTable(name: "AnimeProducers", schema: "App");
     }
 }

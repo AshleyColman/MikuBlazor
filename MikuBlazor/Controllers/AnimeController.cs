@@ -6,7 +6,7 @@ using MikuBlazor.DTO.Requests;
 namespace MikuBlazor.Controllers;
 
 [ApiController]
-[Route("anime")]
+[Route("api/anime")]
 public class AnimeController(ISender sender) : ControllerBase
 {
     [HttpGet]

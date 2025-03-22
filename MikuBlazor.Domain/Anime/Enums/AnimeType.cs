@@ -1,6 +1,6 @@
 namespace MikuBlazor.Domain.Anime.Enums;
 
-public enum AnimeType
+public static class AnimeType
 {
-    TV
+    public static Guid TV = new("21EC66BE-5DC3-46C3-BD2A-3D71E15F9585");
 }

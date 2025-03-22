@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
 
+builder.Services.AddControllers();
 builder.Services.AddMudServices();
 builder.Services.AddEntityFrameworkServices(builder.Configuration);
 builder.Services.AddApplicationServices();
@@ -30,5 +31,7 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+app.MapControllers();
 
 app.Run();

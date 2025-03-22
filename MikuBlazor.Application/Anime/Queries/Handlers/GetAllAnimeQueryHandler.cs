@@ -14,7 +14,8 @@ public class GetAllAnimeQueryHandler(
         GetAllAnimeQuery request, 
         CancellationToken cancellationToken)
     {
-        IList<Domain.Anime.Entity.Anime> animes = await animeRepository.GetAllAsync(asTracking: false);
+        IList<Domain.Anime.Entity.Anime> animes = await animeRepository.GetAllAsync(
+            Projections.Projections.GetAllAnimeQueryProjection(), asTracking: false);
 
         var response = mapper.Map<IList<AnimeResponse>>(animes);
 

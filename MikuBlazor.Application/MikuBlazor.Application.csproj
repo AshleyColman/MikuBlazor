@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Anime\Commands\" />
-      <Folder Include="Anime\Queries\Validators\" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using MikuBlazor.Domain.Anime.Entity;
@@ -6,29 +7,27 @@ using MikuBlazor.Persistence.EntityFrameworkCore.Context;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.Repositories;
 
-public abstract class EntityRepository<T>(DbContextFactory<AppDbContext> dbContextFactory)
+public abstract class EntityRepository<T>(IDbContextFactory<AppDbContext> dbContextFactory)
     : IReadRepository<T>, ICreateRepository<T>, IDeleteRepository<T> 
-        where T : Entity
+        where T : Entity, new()
 {
-    public async Task<IList<T>> GetAllAsync(bool asTracking)
+    public async Task<IList<T>> GetAllAsync(Expression<Func<T, T>>? select, bool asTracking)
     {
-        AppDbContext context = await dbContextFactory.CreateDbContextAsync();
+        await using AppDbContext context = await dbContextFactory.CreateDbContextAsync();
 
         IQueryable<T> query = context.Set<T>()
                                      .AsQueryable();
 
         query = SetAsTracking(query, asTracking);
 
-        IList<T> entities = await query.ToListAsync();
-
-        await context.DisposeAsync();
-
-        return entities;
+        IEnumerable<T> querySelect = SetSelect(query, select);
+        
+        return querySelect.ToList();
     }
     
     public async Task<T?> GetByIdAsync(Guid id, bool asTracking)
     {
-        AppDbContext context = await dbContextFactory.CreateDbContextAsync();
+        await using AppDbContext context = await dbContextFactory.CreateDbContextAsync();
 
         IQueryable<T> query = context.Set<T>()
                                      .AsQueryable();
@@ -36,32 +35,28 @@ public abstract class EntityRepository<T>(DbContextFactory<AppDbContext> dbConte
         query = SetAsTracking(query, asTracking);
 
         T? entity = await query.FirstOrDefaultAsync(x => x.Id == id);
-        
-        await context.DisposeAsync();
 
         return entity;
     }
     
     public async Task AddAsync(T entity)
     {
-        AppDbContext context = await dbContextFactory.CreateDbContextAsync();
+        await using AppDbContext context = await dbContextFactory.CreateDbContextAsync();
 
         context.Set<T>()
                .Add(entity);
 
         await context.SaveChangesAsync();
-        await context.DisposeAsync();
     }
     
     public async Task DeleteAsync(T entity)
     {
-        AppDbContext context = await dbContextFactory.CreateDbContextAsync();
+        await using AppDbContext context = await dbContextFactory.CreateDbContextAsync();
 
         context.Set<T>()
                .Remove(entity);
 
         await context.SaveChangesAsync();
-        await context.DisposeAsync();
     }
 
     protected IQueryable<T> SetAsTracking(IQueryable<T> query, bool asTracking)
@@ -71,5 +66,12 @@ public abstract class EntityRepository<T>(DbContextFactory<AppDbContext> dbConte
             : query.AsNoTracking();
 
         return query;
+    }
+
+    protected IEnumerable<T> SetSelect(IQueryable<T> query, Expression<Func<T, T>>? select)
+    {
+        return select is null 
+            ? query 
+            : query.Select(select);
     }
 }
