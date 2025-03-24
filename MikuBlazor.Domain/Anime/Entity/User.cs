@@ -8,5 +8,5 @@ public sealed class User : Entity
 
     public IList<UserAnimeFavourites> AnimeFavourites { get; set; } = [];
     public IList<UserAnimeRatings> AnimeRatings { get; set; } = [];
-    public IList<UserCharacterFavourites> UserCharacterFavourites { get; set; } = [];
+    public IList<UserCharacterFavourites> CharacterFavourites { get; set; } = [];
 }

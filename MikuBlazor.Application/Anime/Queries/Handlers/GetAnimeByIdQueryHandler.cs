@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using MikuBlazor.Domain.Anime.DataGroups;
 using MikuBlazor.DTO.Requests;
 using MikuBlazor.Interfaces.Repositories;
 
@@ -12,7 +13,12 @@ public class GetAnimeByIdQueryHandler(
 {
     public async Task<AnimeResponse> Handle(GetAnimeByIdQuery request, CancellationToken cancellationToken)
     {
-        Domain.Anime.Entity.Anime anime = await animeRepository.GetByIdAsync(request.Id, asTracking: false)!;
+        AnimeDataGroups[] dataGroups =
+        [
+            AnimeDataGroups.Characters
+        ];
+        
+        Domain.Anime.Entity.Anime anime = await animeRepository.GetByIdAsync(request.Id, asTracking: false, dataGroups)!;
 
         var response = mapper.Map<AnimeResponse>(anime);
 

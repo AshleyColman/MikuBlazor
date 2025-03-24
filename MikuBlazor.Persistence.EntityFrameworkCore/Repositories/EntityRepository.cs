@@ -9,7 +9,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Repositories;
 
 public abstract class EntityRepository<T>(IDbContextFactory<AppDbContext> dbContextFactory)
     : IReadRepository<T>, ICreateRepository<T>, IDeleteRepository<T> 
-        where T : Entity, new()
+        where T : Entity
 {
     public async Task<IList<T>> GetAllAsync(Expression<Func<T, T>>? select, bool asTracking)
     {

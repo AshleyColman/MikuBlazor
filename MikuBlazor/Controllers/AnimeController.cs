@@ -21,9 +21,9 @@ public class AnimeController(ISender sender) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<AnimeResponse>> GetAnimeById(Guid Id)
+    public async Task<ActionResult<AnimeResponse>> GetAnimeById(Guid id)
     {
-        AnimeResponse result = await sender.Send(new GetAnimeByIdQuery(Id));
+        AnimeResponse result = await sender.Send(new GetAnimeByIdQuery(id));
 
         return Ok(result);
     }
