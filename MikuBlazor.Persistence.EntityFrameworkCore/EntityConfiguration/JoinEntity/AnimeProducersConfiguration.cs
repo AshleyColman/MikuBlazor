@@ -5,7 +5,7 @@ using MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.JoinEntity;
 
-public sealed class AnimeProducersConfiguration : EntityConfiguration<AnimeProducers>
+public sealed class AnimeProducersConfiguration : BaseEntityConfiguration<AnimeProducers>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<AnimeProducers> builder)
     {

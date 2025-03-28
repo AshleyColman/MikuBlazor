@@ -2,7 +2,7 @@ using AutoMapper;
 
 namespace MikuBlazor.Application.AutoMapper;
 
-public class AppProfile : Profile
+public class AppProfile : global::AutoMapper.Profile
 {
     public AppProfile()
     {

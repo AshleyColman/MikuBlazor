@@ -5,7 +5,7 @@ using MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.JoinEntity;
 
-public sealed class AnimeGenresConfiguration : EntityConfiguration<AnimeGenres>
+public sealed class AnimeGenresConfiguration : BaseEntityConfiguration<AnimeGenres>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<AnimeGenres> builder)
     {

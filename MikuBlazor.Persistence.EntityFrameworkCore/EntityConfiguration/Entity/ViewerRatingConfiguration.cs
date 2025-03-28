@@ -4,13 +4,13 @@ using MikuBlazor.Domain.Anime.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
-public sealed class ViewerRatingConfiguration : EntityConfiguration<ViewerRating>
+public sealed class ViewerRatingConfiguration : BaseEntityConfiguration<ViewerRating>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<ViewerRating> builder)
     {
         builder.ToTable(name: "ViewerRatings", schema: "App");
         
         builder.Property(x => x.Name)
-               .HasMaxLength(25);
+            .HasMaxLength(25);
     }
 }

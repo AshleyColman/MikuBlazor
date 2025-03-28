@@ -5,16 +5,16 @@ using MikuBlazor.Domain.Anime.JoinEntity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
-public sealed class AnimeConfiguration : EntityConfiguration<Anime>
+public sealed class AnimeConfiguration : BaseEntityConfiguration<Anime>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<Anime> builder)
-    {
+    { 
         builder.ToTable(name: "Animes", schema: "App");
-
-        builder.Property(x => x.Title)
+        
+        builder.Property(a => a.Title)
                .HasMaxLength(250);
     
-        builder.Property(x => x.JapaneseTitle)
+        builder.Property(a => a.JapaneseTitle)
                .HasMaxLength(250);
                
         builder.HasOne<AnimeStatus>(a => a.Status)
@@ -46,63 +46,63 @@ public sealed class AnimeConfiguration : EntityConfiguration<Anime>
                              .HasForeignKey(ac => ac.AnimeId));
         
         builder.HasMany(a => a.Producers)
-               .WithMany(c => c.Animes)
+               .WithMany(p => p.Animes)
                .UsingEntity<AnimeProducers>(
                       join => join
-                             .HasOne(ac => ac.Producer)
+                             .HasOne(ap => ap.Producer)
                              .WithMany()
-                             .HasForeignKey(ac => ac.ProducerId),
+                             .HasForeignKey(ap => ap.ProducerId),
                       join => join
-                             .HasOne(ac => ac.Anime)
+                             .HasOne(ap => ap.Anime)
                              .WithMany()
-                             .HasForeignKey(ac => ac.AnimeId));
+                             .HasForeignKey(ap => ap.AnimeId));
         
         builder.HasMany(a => a.Studios)
                .WithMany(c => c.Animes)
                .UsingEntity<AnimeStudios>(
                       join => join
-                             .HasOne(ac => ac.Studio)
+                             .HasOne(x => x.Studio)
                              .WithMany()
-                             .HasForeignKey(ac => ac.StudioId),
+                             .HasForeignKey(x => x.StudioId),
                       join => join
-                             .HasOne(ac => ac.Anime)
+                             .HasOne(x => x.Anime)
                              .WithMany()
-                             .HasForeignKey(ac => ac.AnimeId));
+                             .HasForeignKey(x => x.AnimeId));
         
         builder.HasMany(a => a.Genres)
                .WithMany(c => c.Animes)
                .UsingEntity<AnimeGenres>(
                       join => join
-                             .HasOne(ac => ac.Genre)
+                             .HasOne(ag => ag.Genre)
                              .WithMany()
-                             .HasForeignKey(ac => ac.GenreId),
+                             .HasForeignKey(ag => ag.GenreId),
                       join => join
-                             .HasOne(ac => ac.Anime)
+                             .HasOne(ag => ag.Anime)
                              .WithMany()
-                             .HasForeignKey(ac => ac.AnimeId));
+                             .HasForeignKey(ag => ag.AnimeId));
         
         builder.HasMany(a => a.Tags)
                .WithMany(c => c.Animes)
                .UsingEntity<AnimeTags>(
                       join => join
-                             .HasOne(ac => ac.Tag)
+                             .HasOne(at => at.Tag)
                              .WithMany()
-                             .HasForeignKey(ac => ac.TagId),
+                             .HasForeignKey(at => at.TagId),
                       join => join
-                             .HasOne(ac => ac.Anime)
+                             .HasOne(at => at.Anime)
                              .WithMany()
-                             .HasForeignKey(ac => ac.AnimeId));
+                             .HasForeignKey(at => at.AnimeId));
         
         builder.HasMany(a => a.Episodes)
                .WithMany(c => c.Animes)
                .UsingEntity<AnimeEpisodes>(
                       join => join
-                             .HasOne(ac => ac.Episode)
+                             .HasOne(ae => ae.Episode)
                              .WithMany()
-                             .HasForeignKey(ac => ac.EpisodeId),
+                             .HasForeignKey(ae => ae.EpisodeId),
                       join => join
-                             .HasOne(ac => ac.Anime)
+                             .HasOne(ae => ae.Anime)
                              .WithMany()
-                             .HasForeignKey(ac => ac.AnimeId));
+                             .HasForeignKey(ae => ae.AnimeId));
     }
 }

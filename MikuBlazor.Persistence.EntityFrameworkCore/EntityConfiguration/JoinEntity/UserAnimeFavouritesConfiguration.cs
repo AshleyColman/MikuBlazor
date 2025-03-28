@@ -5,7 +5,7 @@ using MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.JoinEntity;
 
-public sealed class UserAnimeFavouritesConfiguration : EntityConfiguration<UserAnimeFavourites>
+public sealed class UserAnimeFavouritesConfiguration : BaseEntityConfiguration<UserAnimeFavourites>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<UserAnimeFavourites> builder)
     {

@@ -22,6 +22,8 @@ public static class ServiceCollectionExtensions
         });
 
         services.AddScoped<IAnimeRepository, AnimeRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICharacterRepository, CharacterRepository>();
         
         return services;
     }

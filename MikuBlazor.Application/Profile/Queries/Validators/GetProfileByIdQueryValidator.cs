@@ -1,11 +1,11 @@
 using FluentValidation;
 using MikuBlazor.Domain.Validation;
 
-namespace MikuBlazor.Application.Character.Queries.Validators;
+namespace MikuBlazor.Application.Profile.Queries.Validators;
 
-public class GetCharacterByIdQueryValidator : AbstractValidator<GetCharacterByIdQuery>
+public sealed class GetProfileByIdQueryValidator : AbstractValidator<GetProfileByIdQuery>
 {
-    public GetCharacterByIdQueryValidator()
+    public GetProfileByIdQueryValidator()
     {
         RuleFor(x => x.Id)
             .NotEmpty()

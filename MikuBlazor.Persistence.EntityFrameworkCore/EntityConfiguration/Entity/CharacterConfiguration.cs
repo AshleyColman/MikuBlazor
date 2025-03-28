@@ -4,32 +4,32 @@ using MikuBlazor.Domain.Anime.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
-public sealed class CharacterConfiguration : EntityConfiguration<Character>
+public sealed class CharacterConfiguration : BaseEntityConfiguration<Character>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<Character> builder)
     {
         builder.ToTable(name: "Characters", schema: "App");
 
         builder.Property(x => x.FirstName)
-               .HasMaxLength(50);
+            .HasMaxLength(50);
         
         builder.Property(x => x.LastName)
-               .HasMaxLength(50);
+            .HasMaxLength(50);
         
         builder.Property(x => x.JapaneseName)
-               .HasMaxLength(250);
+            .HasMaxLength(250);
         
         builder.Property(x => x.NickName)
-               .HasMaxLength(50);
+            .HasMaxLength(50);
         
         builder.Property(x => x.Description)
-               .HasMaxLength(2500);
+            .HasMaxLength(2500);
         
         builder.Property(x => x.ImageUri)
-               .HasMaxLength(4000);
+            .HasMaxLength(4000);
         
         builder.HasOne<Gender>(c => c.Gender)
-               .WithMany(g => g.Characters)
-               .HasForeignKey(c => c.GenderId);
+            .WithMany(g => g.Characters)
+            .HasForeignKey(c => c.GenderId);
     }
 }

@@ -9,11 +9,11 @@ namespace MikuBlazor.Application.Profile.Queries.Handlers;
 
 public class GetProfileByIdQueryHandler(
     IUserRepository userRepository,
-    IMapper mapper) 
+    IMapper mapper)
     : IRequestHandler<GetProfileByIdQuery, ProfileResponse>
 {
     public async Task<ProfileResponse> Handle(
-        GetProfileByIdQuery request, 
+        GetProfileByIdQuery request,
         CancellationToken cancellationToken)
     {
         UserDataGroups[] dataGroups =
@@ -28,4 +28,5 @@ public class GetProfileByIdQueryHandler(
         var response = mapper.Map<ProfileResponse>(user);
 
         return response;
+    }
 }

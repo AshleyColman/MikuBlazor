@@ -1,6 +1,6 @@
 namespace MikuBlazor.Domain.Anime.Entity;
 
-public class Entity
+public abstract class Entity
 {
     public Entity()
     {

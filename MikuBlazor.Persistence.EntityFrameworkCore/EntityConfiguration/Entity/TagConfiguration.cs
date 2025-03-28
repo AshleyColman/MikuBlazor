@@ -4,13 +4,13 @@ using MikuBlazor.Domain.Anime.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
-internal sealed class TagConfiguration : EntityConfiguration<Tag>
+internal sealed class TagConfiguration : BaseEntityConfiguration<Tag>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<Tag> builder)
     {
         builder.ToTable(name: "Tags", schema: "App");
         
         builder.Property(x => x.Name)
-               .HasMaxLength(50);
+            .HasMaxLength(50);
     }
 }

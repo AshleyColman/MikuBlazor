@@ -5,7 +5,7 @@ using MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.JoinEntity;
 
-public sealed class AnimeTagsConfiguration : EntityConfiguration<AnimeTags>
+public sealed class AnimeTagsConfiguration : BaseEntityConfiguration<AnimeTags>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<AnimeTags> builder)
     {

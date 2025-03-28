@@ -4,7 +4,7 @@ using MikuBlazor.Domain.Anime.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
-public class EpisodeConfiguration : EntityConfiguration<Episode>
+public class EpisodeConfiguration : BaseEntityConfiguration<Episode>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<Episode> builder)
     {

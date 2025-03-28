@@ -4,13 +4,13 @@ using MikuBlazor.Domain.Anime.Entity;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 
-public sealed class StudioConfiguration : EntityConfiguration<Studio>
+public sealed class StudioConfiguration : BaseEntityConfiguration<Studio>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<Studio> builder)
     {
         builder.ToTable(name: "Studios", schema: "App");
         
         builder.Property(x => x.Name)
-               .HasMaxLength(50);
+            .HasMaxLength(50);
     }
 }
