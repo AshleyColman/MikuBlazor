@@ -12,7 +12,7 @@ using MikuBlazor.Persistence.EntityFrameworkCore.Context;
 namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250328215802_initial")]
+    [Migration("20250328220912_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -25,100 +25,9 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AnimeCharacter", b =>
-                {
-                    b.Property<Guid>("AnimesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CharactersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AnimesId", "CharactersId");
-
-                    b.HasIndex("CharactersId");
-
-                    b.ToTable("AnimeCharacter");
-                });
-
-            modelBuilder.Entity("AnimeEpisode", b =>
-                {
-                    b.Property<Guid>("AnimesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EpisodesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AnimesId", "EpisodesId");
-
-                    b.HasIndex("EpisodesId");
-
-                    b.ToTable("AnimeEpisode");
-                });
-
-            modelBuilder.Entity("AnimeGenre", b =>
-                {
-                    b.Property<Guid>("AnimesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("GenresId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AnimesId", "GenresId");
-
-                    b.HasIndex("GenresId");
-
-                    b.ToTable("AnimeGenre");
-                });
-
-            modelBuilder.Entity("AnimeProducer", b =>
-                {
-                    b.Property<Guid>("AnimesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProducersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AnimesId", "ProducersId");
-
-                    b.HasIndex("ProducersId");
-
-                    b.ToTable("AnimeProducer");
-                });
-
-            modelBuilder.Entity("AnimeStudio", b =>
-                {
-                    b.Property<Guid>("AnimesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("StudiosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AnimesId", "StudiosId");
-
-                    b.HasIndex("StudiosId");
-
-                    b.ToTable("AnimeStudio");
-                });
-
-            modelBuilder.Entity("AnimeTag", b =>
-                {
-                    b.Property<Guid>("AnimesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TagsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AnimesId", "TagsId");
-
-                    b.HasIndex("TagsId");
-
-                    b.ToTable("AnimeTag");
-                });
-
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Anime", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -141,7 +50,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("JapaneseTitle")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<Guid>("ProducerId")
                         .HasColumnType("uniqueidentifier");
@@ -166,7 +76,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<Guid>("TypeId")
                         .HasColumnType("uniqueidentifier");
@@ -190,7 +101,30 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ViewerRatingId");
 
-                    b.ToTable("Anime");
+                    b.ToTable("Animes", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("52a764e6-8be8-4841-8df0-8d16577b38ae"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2025, 4, 25, 22, 9, 12, 113, DateTimeKind.Local).AddTicks(2111),
+                            GenreId = new Guid("24920bf5-f900-4cc9-b162-cbd6b6ed4b63"),
+                            IsDeleted = false,
+                            JapaneseTitle = "Sousou no Frieren",
+                            ProducerId = new Guid("afac5689-7c69-4fbe-b3aa-b24312906156"),
+                            Rank = 1,
+                            Rating = (byte)10,
+                            SeasonId = new Guid("721087fe-7f30-402e-a3f7-630d72456dc3"),
+                            StartDate = new DateTime(2025, 3, 28, 22, 9, 12, 113, DateTimeKind.Local).AddTicks(2023),
+                            StatusId = new Guid("c3336d32-7e62-4206-bbe0-0237a5a98ffc"),
+                            StudioId = new Guid("de315bc7-62ab-4de9-8bdf-85d6e7b36ea4"),
+                            Title = "Frieren: Beyond Journey's End",
+                            TypeId = new Guid("21ec66be-5dc3-46c3-bd2a-3d71e15f9585"),
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            ViewerRatingId = new Guid("0ce556d2-a10a-471a-a2c2-ca19622012ee")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.AnimeStatus", b =>
@@ -212,7 +146,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -222,13 +157,23 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AnimeStatus");
+                    b.ToTable("AnimeStatuses", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c3336d32-7e62-4206-bbe0-0237a5a98ffc"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Airing",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.AnimeType", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -245,7 +190,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -255,13 +201,23 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AnimeType");
+                    b.ToTable("AnimeTypes", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("21ec66be-5dc3-46c3-bd2a-3d71e15f9585"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "TV",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Character", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Age")
@@ -278,32 +234,38 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2500)
+                        .HasColumnType("nvarchar(2500)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("GenderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageUri")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("JapaneseName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NickName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -315,13 +277,30 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasIndex("GenderId");
 
-                    b.ToTable("Character");
+                    b.ToTable("Characters", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("48948095-87f3-4a9e-8e25-ccb7c99e5d1e"),
+                            Age = 1000,
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Frieren is a powerful warrior who has lived for over 1000 years. She is known as the Slayer and is feared by many.",
+                            FirstName = "Frieren",
+                            GenderId = new Guid("c0304b45-7bbb-40c9-b5f5-bf3dc9e3e564"),
+                            ImageUri = "https://cdn.myanimelist.net/images/characters/16/366547.jpg",
+                            IsDeleted = false,
+                            JapaneseName = "フリーレン",
+                            LastName = "",
+                            NickName = "Frieren the Slayer",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Episode", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -355,13 +334,25 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Episode");
+                    b.ToTable("Episodes", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("06cedd70-9ce0-4ffe-88f6-f1392eeff6a1"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Episode 1description",
+                            IsDeleted = false,
+                            Number = 1,
+                            Title = "Episode 1",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Gender", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -378,7 +369,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -388,7 +380,36 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Gender");
+                    b.ToTable("Genders", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c0304b45-7bbb-40c9-b5f5-bf3dc9e3e564"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Female",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("9c76b669-f696-478c-8c34-6ac5144526f7"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Male",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("1104f3d3-dd59-40c1-9536-763a4b5ad217"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Other",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Genre", b =>
@@ -422,12 +443,22 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genre");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("24920bf5-f900-4cc9-b162-cbd6b6ed4b63"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Fantasy",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Producer", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -444,7 +475,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -454,13 +486,23 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producer");
+                    b.ToTable("Producers", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("afac5689-7c69-4fbe-b3aa-b24312906156"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Aniplex",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Season", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -477,7 +519,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -487,13 +530,23 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Season");
+                    b.ToTable("Seasons", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("721087fe-7f30-402e-a3f7-630d72456dc3"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Fall2025",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Studio", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -510,7 +563,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -520,13 +574,23 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Studio");
+                    b.ToTable("Studios", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("de315bc7-62ab-4de9-8bdf-85d6e7b36ea4"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Madhouse",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Tag", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -543,7 +607,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -553,13 +618,23 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tags", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0f1b80d6-cca6-4a99-ab46-8af345a3f0ae"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Fantasy",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -582,17 +657,17 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users", "App");
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.ViewerRating", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -609,7 +684,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -619,13 +695,252 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ViewerRating");
+                    b.ToTable("ViewerRatings", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0ce556d2-a10a-471a-a2c2-ca19622012ee"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "PG13",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeCharacters", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AnimeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CharacterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimeId");
+
+                    b.HasIndex("CharacterId");
+
+                    b.ToTable("AnimeCharacters", "App");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeEpisodes", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AnimeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EpisodeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimeId");
+
+                    b.HasIndex("EpisodeId");
+
+                    b.ToTable("AnimeEpisodes", "App");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeGenres", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AnimeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GenreId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimeId");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("AnimeGenres", "App");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeProducers", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AnimeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ProducerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimeId");
+
+                    b.HasIndex("ProducerId");
+
+                    b.ToTable("AnimeProducers", "App");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeStudios", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AnimeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("StudioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimeId");
+
+                    b.HasIndex("StudioId");
+
+                    b.ToTable("AnimeStudios", "App");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeTags", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AnimeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimeId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("AnimeTags", "App");
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.UserAnimeFavourites", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AnimeId")
@@ -658,13 +973,12 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserAnimeFavourites");
+                    b.ToTable("UserAnimeFavourites", "App");
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.UserAnimeRatings", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AnimeId")
@@ -700,13 +1014,12 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserAnimeRatings");
+                    b.ToTable("UserAnimeRatings", "App");
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.UserCharacterFavourites", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("AnimeId")
@@ -744,97 +1057,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserCharacterFavourites");
-                });
-
-            modelBuilder.Entity("AnimeCharacter", b =>
-                {
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", null)
-                        .WithMany()
-                        .HasForeignKey("AnimesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Character", null)
-                        .WithMany()
-                        .HasForeignKey("CharactersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AnimeEpisode", b =>
-                {
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", null)
-                        .WithMany()
-                        .HasForeignKey("AnimesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Episode", null)
-                        .WithMany()
-                        .HasForeignKey("EpisodesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AnimeGenre", b =>
-                {
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", null)
-                        .WithMany()
-                        .HasForeignKey("AnimesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Genre", null)
-                        .WithMany()
-                        .HasForeignKey("GenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AnimeProducer", b =>
-                {
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", null)
-                        .WithMany()
-                        .HasForeignKey("AnimesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Producer", null)
-                        .WithMany()
-                        .HasForeignKey("ProducersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AnimeStudio", b =>
-                {
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", null)
-                        .WithMany()
-                        .HasForeignKey("AnimesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Studio", null)
-                        .WithMany()
-                        .HasForeignKey("StudiosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AnimeTag", b =>
-                {
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", null)
-                        .WithMany()
-                        .HasForeignKey("AnimesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("UserCharacterFavourites", "App");
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Anime", b =>
@@ -881,6 +1104,120 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                         .IsRequired();
 
                     b.Navigation("Gender");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeCharacters", b =>
+                {
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", "Anime")
+                        .WithMany()
+                        .HasForeignKey("AnimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Character", "Character")
+                        .WithMany()
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Anime");
+
+                    b.Navigation("Character");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeEpisodes", b =>
+                {
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", "Anime")
+                        .WithMany()
+                        .HasForeignKey("AnimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Episode", "Episode")
+                        .WithMany()
+                        .HasForeignKey("EpisodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Anime");
+
+                    b.Navigation("Episode");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeGenres", b =>
+                {
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", "Anime")
+                        .WithMany()
+                        .HasForeignKey("AnimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Anime");
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeProducers", b =>
+                {
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", "Anime")
+                        .WithMany()
+                        .HasForeignKey("AnimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Producer", "Producer")
+                        .WithMany()
+                        .HasForeignKey("ProducerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Anime");
+
+                    b.Navigation("Producer");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeStudios", b =>
+                {
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", "Anime")
+                        .WithMany()
+                        .HasForeignKey("AnimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Studio", "Studio")
+                        .WithMany()
+                        .HasForeignKey("StudioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Anime");
+
+                    b.Navigation("Studio");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeTags", b =>
+                {
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Anime", "Anime")
+                        .WithMany()
+                        .HasForeignKey("AnimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Anime");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.UserAnimeFavourites", b =>

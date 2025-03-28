@@ -5,7 +5,7 @@ using MikuBlazor.Domain.Anime.JoinEntity;
 using MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 using AnimeStatus = MikuBlazor.Domain.Anime.Entity.AnimeStatus;
 using AnimeType = MikuBlazor.Domain.Anime.Entity.AnimeType;
-using Gender = MikuBlazor.Domain.Anime.Enums.Gender;
+using Gender = MikuBlazor.Domain.Anime.Entity.Gender;
 using Genre = MikuBlazor.Domain.Anime.Entity.Genre;
 using Season = MikuBlazor.Domain.Anime.Entity.Season;
 using ViewerRating = MikuBlazor.Domain.Anime.Entity.ViewerRating;
@@ -17,38 +17,73 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
-
-        modelBuilder.ApplyConfiguration(new AnimeStatusConfiguration());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         
         SeedDb(modelBuilder);
     }
 
     private static void SeedDb(ModelBuilder modelBuilder)
     {
-        // var animeTypeId = SeedAnimeTypes(modelBuilder);
-        //
-        // var animeStatusId = SeedAnimeStatuses(modelBuilder);
-        //
-        // var animeProducerId = SeedAnimeProducers(modelBuilder);
-        //
-        // var animeStudioId = SeedAnimeStudios(modelBuilder);
-        //
-        // var seasonId = SeedAnimeSeasons(modelBuilder);
-        //
-        // var genreId = SeedGenres(modelBuilder);
-        //
-        // var viewerRatingId = SeedViewerRatings(modelBuilder);
-        //
-        // SeedEpisodes(modelBuilder);
-        //
-        // SeedCharacters(modelBuilder);
-        //
-        // SeedAnimes(modelBuilder, animeStatusId, animeTypeId, animeProducerId, animeStudioId, seasonId, genreId, viewerRatingId);
-        //
-        // SeedTags(modelBuilder);
-
+        var animeTypeId = SeedAnimeTypes(modelBuilder);
         
+        var animeStatusId = SeedAnimeStatuses(modelBuilder);
+        
+        var animeProducerId = SeedAnimeProducers(modelBuilder);
+        
+        var animeStudioId = SeedAnimeStudios(modelBuilder);
+        
+        var seasonId = SeedAnimeSeasons(modelBuilder);
+        
+        var genreId = SeedGenres(modelBuilder);
+        
+        var viewerRatingId = SeedViewerRatings(modelBuilder);
+        
+        SeedEpisodes(modelBuilder);
+
+        SeedGenders(modelBuilder);
+        
+        var characterId = SeedCharacters(modelBuilder);
+        
+        var animeId = SeedAnimes(modelBuilder, animeStatusId, animeTypeId, animeProducerId, animeStudioId, seasonId, genreId, viewerRatingId);
+        
+        SeedTags(modelBuilder);
+
+        SeedAnimeCharacters(modelBuilder, animeId, characterId);
+    }
+
+    private static void SeedAnimeCharacters(ModelBuilder modelBuilder, Guid animeId, Guid characterId)
+    {
+        modelBuilder.Entity<AnimeCharacters>().HasData(
+        [
+            new AnimeCharacters
+            {
+                Id = Guid.NewGuid(),
+                AnimeId = animeId,
+                CharacterId = characterId
+            } 
+        ]);
+    }
+
+    private static void SeedGenders(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Gender>().HasData(
+        [
+            new Gender
+            {
+                Id = Domain.Anime.Enums.Gender.Female,
+                Name = "Female"
+            },
+            new Gender
+            {
+                Id = Domain.Anime.Enums.Gender.Male,
+                Name = "Male"
+            },
+            new Gender
+            {
+                Id = Domain.Anime.Enums.Gender.Other,
+                Name = "Other"
+            }
+        ]);
     }
 
     private static void SeedTags(ModelBuilder modelBuilder)
@@ -64,12 +99,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
         ]);
     }
 
-    private static void SeedAnimes(ModelBuilder modelBuilder, Guid animeStatusId, Guid animeTypeId, Guid animeProducerId,
+    private static Guid SeedAnimes(ModelBuilder modelBuilder, Guid animeStatusId, Guid animeTypeId, Guid animeProducerId,
         Guid animeStudioId, Guid seasonId, Guid genreId, Guid viewerRatingId)
     {
         Guid animeId = Guid.NewGuid();
         modelBuilder.Entity<Anime>().HasData(
-        [   new()
+        [new()
             {
                 Id = animeId,
                 Title = "Frieren: Beyond Journey's End",
@@ -86,25 +121,30 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
                 GenreId = genreId,
                 ViewerRatingId = viewerRatingId
             }]);
+
+        return animeId;
     }
 
-    private static void SeedCharacters(ModelBuilder modelBuilder)
+    private static Guid SeedCharacters(ModelBuilder modelBuilder)
     {
         Guid characterId = Guid.NewGuid();
         modelBuilder.Entity<Character>().HasData(
         [
             new Character
             {
+                Id = characterId,
                 FirstName = "Frieren",
                 LastName = string.Empty,
                 Age = 1000,
                 NickName = "Frieren the Slayer",
                 JapaneseName = "フリーレン",
-                GenderId = Gender.Female,
+                GenderId = Domain.Anime.Enums.Gender.Female,
                 Description = "Frieren is a powerful warrior who has lived for over 1000 years. She is known as the Slayer and is feared by many.",
                 ImageUri = "https://cdn.myanimelist.net/images/characters/16/366547.jpg"
             }
         ]);
+
+        return characterId;
     }
 
     private static void SeedEpisodes(ModelBuilder modelBuilder)
