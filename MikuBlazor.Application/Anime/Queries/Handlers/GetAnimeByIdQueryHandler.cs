@@ -8,6 +8,7 @@ namespace MikuBlazor.Application.Anime.Queries.Handlers;
 
 public class GetAnimeByIdQueryHandler(
     IAnimeRepository animeRepository,
+    
     IMapper mapper) 
     : IRequestHandler<GetAnimeByIdQuery, AnimeResponse>
 {
@@ -15,13 +16,17 @@ public class GetAnimeByIdQueryHandler(
     {
         AnimeDataGroups[] dataGroups =
         [
-            AnimeDataGroups.Characters
+            AnimeDataGroups.Characters,
+            AnimeDataGroups.Type,
+            AnimeDataGroups.Status,
+            AnimeDataGroups.Producer,
+            AnimeDataGroups.Studio,
+            AnimeDataGroups.Season,
+            AnimeDataGroups.ViewerRating
         ];
         
         Domain.Anime.Entity.Anime anime = await animeRepository.GetByIdAsync(request.Id, asTracking: false, dataGroups)!;
-
-        var response = mapper.Map<AnimeResponse>(anime);
-
-        return response;
+        
+        return new AnimeResponse();
     }
 }

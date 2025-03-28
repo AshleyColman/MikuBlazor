@@ -10,7 +10,6 @@ public sealed class Anime : Entity
     public string JapaneseTitle { get; set; } = null!;
     public byte Rating { get; set; }
     public UInt16 Rank { get; set; }
-    public UInt16 Episodes { get; set; }
     public Guid StatusId { get; set; }
     public Guid TypeId { get; set; }
     public DateTime? StartDate { get; set; }
@@ -29,6 +28,7 @@ public sealed class Anime : Entity
     public IList<Producer> Producers { get; set; } = [];
     public IList<Studio> Studios { get; set; } = [];
     public IList<Character> Characters { get; set; } = [];
+    public IList<Episode> Episodes { get; set; } = [];
     public IList<Tag> Tags { get; set; } = [];
     public IList<UserAnimeFavourites> UserAnimeFavourites { get; set; } = [];
     public IList<UserAnimeRatings> UserAnimeRatings { get; set; } = [];

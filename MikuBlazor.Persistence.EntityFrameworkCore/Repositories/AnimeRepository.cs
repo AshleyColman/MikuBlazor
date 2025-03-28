@@ -35,6 +35,12 @@ public class AnimeRepository(IDbContextFactory<AppDbContext> dbContextFactory)
     {
         if (dataGroups.Any(x => x == AnimeDataGroups.Characters))
             query = query.Include(x => x.Characters);
+        
+        if (dataGroups.Any(x => x == AnimeDataGroups.Type))
+            query = query.Include(x => x.Type);
+        
+        if (dataGroups.Any(x => x == AnimeDataGroups.Status))
+            query = query.Include(x => x.Status);
 
         return query;
     }

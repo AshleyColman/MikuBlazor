@@ -92,5 +92,17 @@ public sealed class AnimeConfiguration : EntityConfiguration<Anime>
                              .HasOne(ac => ac.Anime)
                              .WithMany()
                              .HasForeignKey(ac => ac.AnimeId));
+        
+        builder.HasMany(a => a.Episodes)
+               .WithMany(c => c.Animes)
+               .UsingEntity<AnimeEpisodes>(
+                      join => join
+                             .HasOne(ac => ac.Episode)
+                             .WithMany()
+                             .HasForeignKey(ac => ac.EpisodeId),
+                      join => join
+                             .HasOne(ac => ac.Anime)
+                             .WithMany()
+                             .HasForeignKey(ac => ac.AnimeId));
     }
 }

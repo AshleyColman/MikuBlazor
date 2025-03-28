@@ -2,5 +2,12 @@ namespace MikuBlazor.Domain.Anime.DataGroups;
 
 public enum AnimeDataGroups
 {
-    Characters
+    Characters,
+    Type,
+    Status,
+    Producer,
+    Studio,
+    Season,
+    Genre,
+    ViewerRating
 }
