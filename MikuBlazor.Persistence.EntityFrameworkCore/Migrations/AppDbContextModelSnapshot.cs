@@ -103,10 +103,10 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("384521bc-e602-4257-bb99-ab991fc81211"),
+                            Id = new Guid("05e6fd44-5dbb-41dc-a2b4-f85b961f3e6d"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndDate = new DateTime(2025, 4, 25, 22, 14, 27, 663, DateTimeKind.Local).AddTicks(4441),
+                            EndDate = new DateTime(2025, 4, 25, 22, 55, 43, 441, DateTimeKind.Local).AddTicks(3863),
                             GenreId = new Guid("24920bf5-f900-4cc9-b162-cbd6b6ed4b63"),
                             IsDeleted = false,
                             JapaneseTitle = "Sousou no Frieren",
@@ -114,7 +114,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                             Rank = 1,
                             Rating = (byte)10,
                             SeasonId = new Guid("721087fe-7f30-402e-a3f7-630d72456dc3"),
-                            StartDate = new DateTime(2025, 3, 28, 22, 14, 27, 663, DateTimeKind.Local).AddTicks(4405),
+                            StartDate = new DateTime(2025, 3, 28, 22, 55, 43, 441, DateTimeKind.Local).AddTicks(3830),
                             StatusId = new Guid("c3336d32-7e62-4206-bbe0-0237a5a98ffc"),
                             StudioId = new Guid("de315bc7-62ab-4de9-8bdf-85d6e7b36ea4"),
                             Title = "Frieren: Beyond Journey's End",
@@ -279,7 +279,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2e013574-3613-4d12-b185-372071ca0899"),
+                            Id = new Guid("7136f54f-0cbd-4f73-b057-5318c197b617"),
                             Age = 1000,
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -336,7 +336,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dfb27088-1c87-484a-8324-5cdd8876475f"),
+                            Id = new Guid("18938857-9f58-4bfb-af9f-4e87967cb8f7"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Episode 1description",
@@ -412,7 +412,6 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Genre", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
@@ -439,7 +438,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genre");
+                    b.ToTable("Genres", "App");
 
                     b.HasData(
                         new
@@ -620,7 +619,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("561c8fdd-90d1-4726-a154-3abf9b9bddd8"),
+                            Id = new Guid("2ff32451-d154-41fe-86b3-7159feaf5855"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
@@ -746,9 +745,9 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("32eedd06-d795-4cc3-abc4-8c6789d69e5f"),
-                            AnimeId = new Guid("384521bc-e602-4257-bb99-ab991fc81211"),
-                            CharacterId = new Guid("2e013574-3613-4d12-b185-372071ca0899"),
+                            Id = new Guid("ba33d22d-779e-48dc-b04d-35f23dbdd275"),
+                            AnimeId = new Guid("05e6fd44-5dbb-41dc-a2b4-f85b961f3e6d"),
+                            CharacterId = new Guid("7136f54f-0cbd-4f73-b057-5318c197b617"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
@@ -793,6 +792,18 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasIndex("EpisodeId");
 
                     b.ToTable("AnimeEpisodes", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d881e219-2b10-4371-b1f5-58bb33fc942b"),
+                            AnimeId = new Guid("05e6fd44-5dbb-41dc-a2b4-f85b961f3e6d"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EpisodeId = new Guid("18938857-9f58-4bfb-af9f-4e87967cb8f7"),
+                            IsDeleted = false,
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeGenres", b =>
@@ -831,6 +842,18 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("AnimeGenres", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("aa6e84c0-eb05-4c31-8017-8e0610fda29e"),
+                            AnimeId = new Guid("05e6fd44-5dbb-41dc-a2b4-f85b961f3e6d"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GenreId = new Guid("24920bf5-f900-4cc9-b162-cbd6b6ed4b63"),
+                            IsDeleted = false,
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeProducers", b =>
@@ -869,6 +892,18 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasIndex("ProducerId");
 
                     b.ToTable("AnimeProducers", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8bbef837-0bf5-41ab-89b8-4fdd2994258e"),
+                            AnimeId = new Guid("05e6fd44-5dbb-41dc-a2b4-f85b961f3e6d"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ProducerId = new Guid("afac5689-7c69-4fbe-b3aa-b24312906156"),
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeStudios", b =>
@@ -907,6 +942,18 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasIndex("StudioId");
 
                     b.ToTable("AnimeStudios", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("04687fa4-ae55-4fb9-81e1-f1fb93b63690"),
+                            AnimeId = new Guid("05e6fd44-5dbb-41dc-a2b4-f85b961f3e6d"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            StudioId = new Guid("de315bc7-62ab-4de9-8bdf-85d6e7b36ea4"),
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.AnimeTags", b =>
@@ -945,6 +992,18 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("AnimeTags", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5b03d297-030a-4477-a425-8773e33236d6"),
+                            AnimeId = new Guid("05e6fd44-5dbb-41dc-a2b4-f85b961f3e6d"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            TagId = new Guid("2ff32451-d154-41fe-86b3-7159feaf5855"),
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.UserAnimeFavourites", b =>

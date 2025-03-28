@@ -9,5 +9,8 @@ public enum AnimeDataGroups
     Studio,
     Season,
     Genre,
-    ViewerRating
+    ViewerRating,
+    Episodes,
+    Genres,
+    Tags
 }

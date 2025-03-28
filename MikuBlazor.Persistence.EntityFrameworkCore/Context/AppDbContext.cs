@@ -6,8 +6,9 @@ using MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 using AnimeStatus = MikuBlazor.Domain.Anime.Entity.AnimeStatus;
 using AnimeType = MikuBlazor.Domain.Anime.Entity.AnimeType;
 using Gender = MikuBlazor.Domain.Anime.Entity.Gender;
-using Genre = MikuBlazor.Domain.Anime.Entity.Genre;
+using Genre = MikuBlazor.Domain.Anime.Enums.Genre;
 using Season = MikuBlazor.Domain.Anime.Entity.Season;
+using Tag = MikuBlazor.Domain.Anime.Enums.Tag;
 using ViewerRating = MikuBlazor.Domain.Anime.Entity.ViewerRating;
 
 namespace MikuBlazor.Persistence.EntityFrameworkCore.Context;
@@ -38,7 +39,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
         
         var viewerRatingId = SeedViewerRatings(modelBuilder);
         
-        SeedEpisodes(modelBuilder);
+        var episodeId = SeedEpisodes(modelBuilder);
 
         SeedGenders(modelBuilder);
         
@@ -49,6 +50,68 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
         SeedTags(modelBuilder);
 
         SeedAnimeCharacters(modelBuilder, animeId, characterId);
+        
+        SeedAnimeGenres(modelBuilder, animeId);
+        
+        SeedAnimeProducers(modelBuilder, animeId);
+        
+        SeedAnimeStudios(modelBuilder, animeId);
+        
+        SeedAnimeTags(modelBuilder, animeId);
+        
+        SeedAnimeEpisodes(modelBuilder, animeId, episodeId);
+    }
+
+    private static void SeedAnimeEpisodes(ModelBuilder modelBuilder, Guid animeId, Guid episodeId)
+    {
+        modelBuilder.Entity<AnimeEpisodes>().HasData(
+        [
+            new AnimeEpisodes
+            {
+                Id = Guid.NewGuid(),
+                AnimeId = animeId,
+                EpisodeId = episodeId
+            } 
+        ]);
+    }
+
+    private static void SeedAnimeTags(ModelBuilder modelBuilder, Guid animeId)
+    {
+        modelBuilder.Entity<AnimeTags>().HasData(
+        [
+            new AnimeTags
+            {
+                Id = Guid.NewGuid(),
+                AnimeId = animeId,
+                TagId = Tag.Fantasy
+            } 
+        ]);
+    }
+
+    private static void SeedAnimeStudios(ModelBuilder modelBuilder, Guid animeId)
+    {
+        modelBuilder.Entity<AnimeStudios>().HasData(
+        [
+            new AnimeStudios
+            {
+                Id = Guid.NewGuid(),
+                AnimeId = animeId,
+                StudioId = AnimeStudio.Madhouse
+            } 
+        ]);
+    }
+
+    private static void SeedAnimeProducers(ModelBuilder modelBuilder, Guid animeId)
+    {
+        modelBuilder.Entity<AnimeProducers>().HasData(
+        [
+            new AnimeProducers
+            {
+                Id = Guid.NewGuid(),
+                AnimeId = animeId,
+                ProducerId = AnimeProducer.Aniplex
+            } 
+        ]);
     }
 
     private static void SeedAnimeCharacters(ModelBuilder modelBuilder, Guid animeId, Guid characterId)
@@ -60,6 +123,19 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
                 Id = Guid.NewGuid(),
                 AnimeId = animeId,
                 CharacterId = characterId
+            } 
+        ]);
+    }
+    
+    private static void SeedAnimeGenres(ModelBuilder modelBuilder, Guid animeId)
+    {
+        modelBuilder.Entity<AnimeGenres>().HasData(
+        [
+            new AnimeGenres()
+            {
+                Id = Guid.NewGuid(),
+                AnimeId = animeId,
+                GenreId = Genre.Fantasy
             } 
         ]);
     }
@@ -88,12 +164,11 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
 
     private static void SeedTags(ModelBuilder modelBuilder)
     {
-        Guid tagId = Guid.NewGuid();
-        modelBuilder.Entity<Tag>().HasData(
+        modelBuilder.Entity<Domain.Anime.Entity.Tag>().HasData(
         [
             new()
             {
-                Id = tagId,
+                Id = Tag.Fantasy,
                 Name = "Fantasy"
             }
         ]);
@@ -147,7 +222,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
         return characterId;
     }
 
-    private static void SeedEpisodes(ModelBuilder modelBuilder)
+    private static Guid SeedEpisodes(ModelBuilder modelBuilder)
     {
         Guid episodeId = Guid.NewGuid();
         modelBuilder.Entity<Episode>().HasData(
@@ -160,6 +235,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
                 Number = 1
             }
         ]);
+
+        return episodeId;
     }
 
     private static Guid SeedViewerRatings(ModelBuilder modelBuilder)
@@ -179,7 +256,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
     private static Guid SeedGenres(ModelBuilder modelBuilder)
     {
         Guid genreId = Domain.Anime.Enums.Genre.Fantasy;
-        modelBuilder.Entity<Genre>().HasData(
+        modelBuilder.Entity<Domain.Anime.Entity.Genre>().HasData(
         [
             new()
             {

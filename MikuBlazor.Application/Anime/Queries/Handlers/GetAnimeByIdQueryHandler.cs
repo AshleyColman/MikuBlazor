@@ -22,7 +22,10 @@ public class GetAnimeByIdQueryHandler(
             AnimeDataGroups.Producer,
             AnimeDataGroups.Studio,
             AnimeDataGroups.Season,
-            AnimeDataGroups.ViewerRating
+            AnimeDataGroups.ViewerRating,
+            AnimeDataGroups.Episodes,
+            AnimeDataGroups.Genres,
+            AnimeDataGroups.Tags
         ];
         
         Domain.Anime.Entity.Anime anime = await animeRepository.GetByIdAsync(request.Id, asTracking: false, dataGroups)!;

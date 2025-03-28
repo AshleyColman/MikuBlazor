@@ -7,7 +7,7 @@ public sealed class AnimeResponse
     public string JapaneseTitle { get; set; } = null!;
     public byte Rating { get; set; }
     public UInt16 Rank { get; set; }
-    public UInt16 Episodes { get; set; }
+    // public UInt16 Episodes { get; set; }
     public Guid StatusId { get; set; }
     public string Type { get; set; } = null!;
     public DateTime? StartDate { get; set; }
