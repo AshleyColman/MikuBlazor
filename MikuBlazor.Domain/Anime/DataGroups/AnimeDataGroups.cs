@@ -8,7 +8,6 @@ public enum AnimeDataGroups
     Producer,
     Studio,
     Season,
-    Genre,
     ViewerRating,
     Episodes,
     Genres,

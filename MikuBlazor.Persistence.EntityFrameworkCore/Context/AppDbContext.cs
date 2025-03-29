@@ -177,7 +177,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
     private static Guid SeedAnimes(ModelBuilder modelBuilder, Guid animeStatusId, Guid animeTypeId, Guid animeProducerId,
         Guid animeStudioId, Guid seasonId, Guid genreId, Guid viewerRatingId)
     {
-        Guid animeId = Guid.NewGuid();
+        Guid animeId = Guid.Parse("4AFF0276-F322-42EC-B75B-F64851ECFC5E"); // TODO: Remove: Hardcode for testing
+        
         modelBuilder.Entity<Anime>().HasData(
         [new()
             {
@@ -190,10 +191,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
                 TypeId = animeTypeId,
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(28),
-                ProducerId = animeProducerId,
-                StudioId = animeStudioId,
                 SeasonId = seasonId,
-                GenreId = genreId,
                 ViewerRatingId = viewerRatingId
             }]);
 

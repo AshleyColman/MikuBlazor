@@ -14,10 +14,7 @@ public sealed class Anime : Entity
     public Guid TypeId { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
-    public Guid ProducerId { get; set; }
-    public Guid StudioId { get; set; }
     public Guid SeasonId { get; set; }
-    public Guid GenreId { get; set; }
     public Guid ViewerRatingId { get; set; }
     
     public AnimeStatus Status { get; set; } = null!;

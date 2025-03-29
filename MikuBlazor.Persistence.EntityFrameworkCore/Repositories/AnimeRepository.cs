@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MikuBlazor.Domain.Anime.DataGroups;
@@ -13,6 +14,7 @@ public class AnimeRepository(IDbContextFactory<AppDbContext> dbContextFactory)
     public async Task<Anime?> GetByIdAsync(
         Guid id, 
         bool asTracking, 
+        Expression<Func<Anime, Anime>>? select,
         params AnimeDataGroups[] dataGroups)
     {
         await using AppDbContext context = await dbContextFactory.CreateDbContextAsync();
@@ -24,7 +26,9 @@ public class AnimeRepository(IDbContextFactory<AppDbContext> dbContextFactory)
 
         query = SetDataGroups(query, dataGroups);
         
-        Anime? entity = await query.FirstOrDefaultAsync(x => x.Id == id);
+        IEnumerable<Anime> querySelect = SetSelect(query, select);
+
+        Anime? entity = querySelect.FirstOrDefault(x => x.Id == id);
 
         return entity;
     }
@@ -51,7 +55,7 @@ public class AnimeRepository(IDbContextFactory<AppDbContext> dbContextFactory)
         if (dataGroups.Any(x => x == AnimeDataGroups.Season))
             query = query.Include(x => x.Season);
         
-        if (dataGroups.Any(x => x == AnimeDataGroups.Genre))
+        if (dataGroups.Any(x => x == AnimeDataGroups.Genres))
             query = query.Include(x => x.Genres);
         
         if (dataGroups.Any(x => x == AnimeDataGroups.ViewerRating))
@@ -63,7 +67,7 @@ public class AnimeRepository(IDbContextFactory<AppDbContext> dbContextFactory)
         if (dataGroups.Any(x => x == AnimeDataGroups.Tags))
             query = query.Include(x => x.Tags);
         
-        if (dataGroups.Any(x => x == AnimeDataGroups.Genre))
+        if (dataGroups.Any(x => x == AnimeDataGroups.Genres))
             query = query.Include(x => x.Genres);
 
         return query;

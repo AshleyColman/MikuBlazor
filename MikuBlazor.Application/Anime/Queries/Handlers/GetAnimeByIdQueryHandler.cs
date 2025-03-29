@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using MikuBlazor.Domain.Anime.DataGroups;
 using MikuBlazor.DTO.Requests;
+using MikuBlazor.DTO.Requests.GetAnime;
 using MikuBlazor.Interfaces.Repositories;
 
 namespace MikuBlazor.Application.Anime.Queries.Handlers;
@@ -28,8 +29,14 @@ public class GetAnimeByIdQueryHandler(
             AnimeDataGroups.Tags
         ];
         
-        Domain.Anime.Entity.Anime anime = await animeRepository.GetByIdAsync(request.Id, asTracking: false, dataGroups)!;
+        Domain.Anime.Entity.Anime anime = await animeRepository.GetByIdAsync(
+            request.Id, 
+            asTracking: false,
+            Projections.Projections.GetAnimeByIdQueryProjection(),
+            dataGroups)!;
+
+        var response = mapper.Map<AnimeResponse>(anime);
         
-        return new AnimeResponse();
+        return response;
     }
 }

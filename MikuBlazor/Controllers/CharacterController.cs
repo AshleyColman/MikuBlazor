@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MikuBlazor.Application.Anime.Queries;
 using MikuBlazor.DTO.Requests;
+using MikuBlazor.DTO.Requests.GetAnime;
 
 namespace MikuBlazor.Controllers;
 
