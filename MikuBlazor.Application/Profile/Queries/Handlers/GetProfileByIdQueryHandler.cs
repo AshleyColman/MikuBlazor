@@ -3,6 +3,7 @@ using MediatR;
 using MikuBlazor.Domain.Anime.DataGroups;
 using MikuBlazor.Domain.Anime.Entity;
 using MikuBlazor.DTO.Requests;
+using MikuBlazor.DTO.Requests.GetProfile;
 using MikuBlazor.Interfaces.Repositories;
 
 namespace MikuBlazor.Application.Profile.Queries.Handlers;
@@ -23,7 +24,11 @@ public class GetProfileByIdQueryHandler(
             UserDataGroups.AnimeRatings
         ];
 
-        User user = await userRepository.GetByIdAsync(request.Id, asTracking: false, dataGroups)!;
+        User user = await userRepository.GetByIdAsync(
+            request.Id, 
+            asTracking: false,
+            Projections.Projections.GetProfileByIdQueryProjection(),
+            dataGroups)!;
 
         var response = mapper.Map<ProfileResponse>(user);
 

@@ -10,4 +10,8 @@
       <Folder Include="Responses\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MikuBlazor.Domain\MikuBlazor.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

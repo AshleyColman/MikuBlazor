@@ -1,9 +1,9 @@
 
 namespace MikuBlazor.Application.AutoMapper;
 
-public class AppProfile : global::AutoMapper.Profile
+public class AppAutoMapperProfile : global::AutoMapper.Profile
 {
-    public AppProfile()
+    public AppAutoMapperProfile()
     {
         CreateMap<Domain.Anime.Entity.Anime, DTO.Requests.GetAnime.AnimeResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
@@ -64,5 +64,21 @@ public class AppProfile : global::AutoMapper.Profile
         CreateMap<Domain.Anime.Entity.Genre, DTO.Requests.GetAnime.GenreResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
+
+        CreateMap<Domain.Anime.Entity.User, DTO.Requests.GetProfile.ProfileResponse>()
+            .ForMember(x => x.Username, opt => opt.MapFrom(y => y.Username))
+            .ForMember(x => x.Forename, opt => opt.MapFrom(y => y.Forename))
+            .ForMember(x => x.Surname, opt => opt.MapFrom(y => y.Surname))
+            .ForMember(x => x.DateOfBirth, opt => opt.MapFrom(y => y.DateOfBirth))
+            .ForMember(x => x.Gender, opt => opt.MapFrom(y => y.Gender))
+            .ForMember(x => x.AnimeFavourites, opt => opt.MapFrom(y => y.AnimeFavourites))
+            .ForMember(x => x.AnimeRatings, opt => opt.MapFrom(y => y.AnimeRatings));
+
+        CreateMap<Domain.Anime.JoinEntity.UserCharacterFavourites, DTO.Requests.GetProfile.CharacterFavouriteResponse>()
+            .ForMember(x => x.CharacterId, opt => opt.MapFrom(y => y.Id))
+            .ForMember(x => x.Character, opt => opt.MapFrom(y => y.Character));
+
+        CreateMap<Domain.Anime.JoinEntity.UserAnimeFavourites, DTO.Requests.GetProfile.CharacterFavouriteResponse>()
+            .ForMember(x => x.CharacterId, opt => opt.MapFrom(y => y.Id));
     }
 }

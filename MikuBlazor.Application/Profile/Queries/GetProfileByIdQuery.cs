@@ -1,5 +1,6 @@
 using MediatR;
 using MikuBlazor.DTO.Requests;
+using MikuBlazor.DTO.Requests.GetProfile;
 
 namespace MikuBlazor.Application.Profile.Queries;
 

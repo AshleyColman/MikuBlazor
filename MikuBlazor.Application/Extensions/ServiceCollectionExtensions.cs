@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
             options.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));
         });
 
-        services.AddAutoMapper(options => options.AddProfile<AppProfile>());
+        services.AddAutoMapper(options => options.AddProfile<AppAutoMapperProfile>());
 
         services.AddValidatorsFromAssembly(currentAssembly);
         
