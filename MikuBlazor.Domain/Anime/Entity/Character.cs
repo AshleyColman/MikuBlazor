@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace MikuBlazor.Domain.Anime.Entity;
 
 public sealed class Character : Entity

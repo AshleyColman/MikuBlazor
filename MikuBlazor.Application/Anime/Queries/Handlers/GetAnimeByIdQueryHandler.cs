@@ -1,7 +1,6 @@
 using AutoMapper;
 using MediatR;
 using MikuBlazor.Domain.Anime.DataGroups;
-using MikuBlazor.DTO.Requests;
 using MikuBlazor.DTO.Requests.GetAnime;
 using MikuBlazor.Interfaces.Repositories;
 

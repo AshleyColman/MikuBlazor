@@ -1,5 +1,5 @@
 using MediatR;
-using MikuBlazor.DTO.Requests;
+using MikuBlazor.DTO.Requests.GetCharacter;
 
 namespace MikuBlazor.Application.Character.Queries;
 

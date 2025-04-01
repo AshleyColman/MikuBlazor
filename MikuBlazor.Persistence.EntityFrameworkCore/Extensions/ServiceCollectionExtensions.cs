@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using MikuBlazor.Interfaces.Repositories;
 using MikuBlazor.Persistence.EntityFrameworkCore.Context;
 using MikuBlazor.Persistence.EntityFrameworkCore.Repositories;

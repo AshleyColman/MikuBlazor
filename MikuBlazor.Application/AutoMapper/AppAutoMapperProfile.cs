@@ -78,7 +78,13 @@ public class AppAutoMapperProfile : global::AutoMapper.Profile
             .ForMember(x => x.CharacterId, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Character, opt => opt.MapFrom(y => y.Character));
 
-        CreateMap<Domain.Anime.JoinEntity.UserAnimeFavourites, DTO.Requests.GetProfile.CharacterFavouriteResponse>()
-            .ForMember(x => x.CharacterId, opt => opt.MapFrom(y => y.Id));
+        CreateMap<Domain.Anime.JoinEntity.UserAnimeFavourites, DTO.Requests.GetProfile.AnimeFavouriteResponse>()
+            .ForMember(x => x.AnimeId, opt => opt.MapFrom(y => y.AnimeId))
+            .ForMember(x => x.Anime, opt => opt.MapFrom(y => y.Anime));
+
+        CreateMap<Domain.Anime.JoinEntity.UserAnimeRatings, DTO.Requests.GetProfile.AnimeRatingResponse>()
+            .ForMember(x => x.Anime, opt => opt.MapFrom(y => y.Anime))
+            .ForMember(x => x.AnimeId, opt => opt.MapFrom(y => y.AnimeId))
+            .ForMember(x => x.Rating, opt => opt.MapFrom(y => y.Rating));
     }
 }

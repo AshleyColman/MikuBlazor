@@ -1,8 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MikuBlazor.Application.Anime.Queries;
-using MikuBlazor.DTO.Requests;
-using MikuBlazor.DTO.Requests.GetAnime;
+using MikuBlazor.Application.Character.Queries;
+using MikuBlazor.DTO.Requests.GetCharacter;
 
 namespace MikuBlazor.Controllers;
 
@@ -10,12 +9,22 @@ namespace MikuBlazor.Controllers;
 [Route("api/character")]
 public class CharacterController(ISender sender) : ControllerBase
 {
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IList<CharacterResponse>>> GetCharacters()
+    {
+        var result = await sender.Send(new GetAllCharactersQuery());
+
+        return Ok(result);
+    }
+    
     [HttpGet("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<CharacterResponse>> GetCharacterById(Guid id)
     {
-        AnimeResponse result = await sender.Send(new GetAnimeByIdQuery(id));
+        CharacterResponse result = await sender.Send(new GetCharacterByIdQuery(id));
 
         return Ok(result);
     }

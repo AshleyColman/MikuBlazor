@@ -1,7 +1,7 @@
 using AutoMapper;
 using MediatR;
 using MikuBlazor.Domain.Anime.DataGroups;
-using MikuBlazor.DTO.Requests;
+using MikuBlazor.DTO.Requests.GetCharacter;
 using MikuBlazor.Interfaces.Repositories;
 
 namespace MikuBlazor.Application.Character.Queries.Handlers;
@@ -22,7 +22,11 @@ public class GetCharacterByIdQueryHandler(
         ];
 
         Domain.Anime.Entity.Character character =
-            await characterRepository.GetByIdAsync(request.Id, asTracking: false, dataGroups)!;
+            await characterRepository.GetByIdAsync(
+                request.Id, 
+                asTracking: false,
+                Projections.Projections.GetCharacterByIdQueryProjection(),
+                dataGroups)!;
 
         var response = mapper.Map<CharacterResponse>(character);
 

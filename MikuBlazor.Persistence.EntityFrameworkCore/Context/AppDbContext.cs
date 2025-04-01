@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using MikuBlazor.Domain.Anime.Entity;
 using MikuBlazor.Domain.Anime.Enums;
 using MikuBlazor.Domain.Anime.JoinEntity;
-using MikuBlazor.Persistence.EntityFrameworkCore.EntityConfiguration.Entity;
 using AnimeStatus = MikuBlazor.Domain.Anime.Entity.AnimeStatus;
 using AnimeType = MikuBlazor.Domain.Anime.Entity.AnimeType;
 using Gender = MikuBlazor.Domain.Anime.Entity.Gender;

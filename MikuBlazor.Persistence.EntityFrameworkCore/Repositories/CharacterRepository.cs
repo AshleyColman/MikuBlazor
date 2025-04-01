@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using MikuBlazor.Domain.Anime.DataGroups;
 using MikuBlazor.Domain.Anime.Entity;
@@ -11,7 +12,8 @@ public class CharacterRepository(IDbContextFactory<AppDbContext> dbContextFactor
 {
     public async Task<Character?> GetByIdAsync(
         Guid id, 
-        bool asTracking, 
+        bool asTracking,
+        Expression<Func<Character, Character>>? select,
         CharacterDataGroups[] dataGroups)
     {
         await using AppDbContext context = await dbContextFactory.CreateDbContextAsync();
@@ -21,8 +23,10 @@ public class CharacterRepository(IDbContextFactory<AppDbContext> dbContextFactor
         query = SetAsTracking(query, asTracking);
 
         query = SetDataGroups(query, dataGroups);
+
+        IEnumerable<Character> querySelect = SetSelect(query, select);
         
-        return await query.FirstOrDefaultAsync(x => x.Id == id);
+        return querySelect.FirstOrDefault(x => x.Id == id);
     }
     
     private IQueryable<Character> SetDataGroups(

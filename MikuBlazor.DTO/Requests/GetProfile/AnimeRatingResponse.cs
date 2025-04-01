@@ -1,5 +1,3 @@
-using System.Security.AccessControl;
-
 namespace MikuBlazor.DTO.Requests.GetProfile;
 
 public sealed class AnimeRatingResponse

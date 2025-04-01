@@ -1,8 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MikuBlazor.Application.Anime.Queries;
 using MikuBlazor.Application.Profile.Queries;
-using MikuBlazor.DTO.Requests;
 using MikuBlazor.DTO.Requests.GetProfile;
 
 namespace MikuBlazor.Controllers;

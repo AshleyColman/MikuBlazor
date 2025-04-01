@@ -1,3 +1,5 @@
+using MikuBlazor.DTO.Requests.GetCharacter;
+
 namespace MikuBlazor.DTO.Requests.GetProfile;
 
 public sealed class ProfileResponse

@@ -6,6 +6,14 @@ namespace MikuBlazor.Application.Profile.Queries.Projections;
 
 public static class Projections
 {
+    public static Expression<Func<User, User>> GetAllProfilesQueryProjection()
+    {
+        return x => new User
+        {
+            Username = x.Username
+        };
+    }
+    
     public static Expression<Func<User, User>> GetProfileByIdQueryProjection()
     {
         return x => new User
