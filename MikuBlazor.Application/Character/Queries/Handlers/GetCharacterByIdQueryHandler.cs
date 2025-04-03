@@ -1,7 +1,7 @@
 using AutoMapper;
 using MediatR;
 using MikuBlazor.Domain.Anime.DataGroups;
-using MikuBlazor.DTO.Requests.GetCharacter;
+using MikuBlazor.DTO.Responses.GetCharacter;
 using MikuBlazor.Interfaces.Repositories;
 
 namespace MikuBlazor.Application.Character.Queries.Handlers;

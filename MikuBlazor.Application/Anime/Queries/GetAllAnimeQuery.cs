@@ -1,5 +1,5 @@
 using MediatR;
-using MikuBlazor.DTO.Requests.GetAnime;
+using MikuBlazor.DTO.Responses.GetAnime;
 
 namespace MikuBlazor.Application.Anime.Queries;
 

@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MikuBlazor.Application.Profile.Queries;
-using MikuBlazor.DTO.Requests.GetProfile;
+using MikuBlazor.DTO.Responses.GetProfile;
 
 namespace MikuBlazor.Controllers;
 
@@ -12,9 +12,9 @@ public class ProfileController(ISender sender) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<ProfileResponse>> GetProfileById(Guid id)
+    public async Task<ActionResult<ProfileResponse>> GetProfileById([FromRoute] Guid id)
     {
-        var result = await sender.Send(new GetProfileByIdQuery(id));
+        ProfileResponse result = await sender.Send(new GetProfileByIdQuery(id));
 
         return Ok(result);
     }

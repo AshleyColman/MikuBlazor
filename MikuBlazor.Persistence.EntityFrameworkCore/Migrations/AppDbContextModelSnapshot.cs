@@ -39,6 +39,10 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImageUri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -97,13 +101,14 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                             Id = new Guid("4aff0276-f322-42ec-b75b-f64851ecfc5e"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndDate = new DateTime(2025, 4, 25, 23, 3, 30, 180, DateTimeKind.Local).AddTicks(8031),
+                            EndDate = new DateTime(2025, 5, 1, 21, 6, 40, 745, DateTimeKind.Local).AddTicks(3035),
+                            ImageUri = "https://cdn.myanimelist.net/images/anime/1015/138006.jpg",
                             IsDeleted = false,
                             JapaneseTitle = "Sousou no Frieren",
                             Rank = 1,
                             Rating = (byte)10,
                             SeasonId = new Guid("721087fe-7f30-402e-a3f7-630d72456dc3"),
-                            StartDate = new DateTime(2025, 3, 28, 23, 3, 30, 180, DateTimeKind.Local).AddTicks(7995),
+                            StartDate = new DateTime(2025, 4, 3, 21, 6, 40, 745, DateTimeKind.Local).AddTicks(2998),
                             StatusId = new Guid("c3336d32-7e62-4206-bbe0-0237a5a98ffc"),
                             Title = "Frieren: Beyond Journey's End",
                             TypeId = new Guid("21ec66be-5dc3-46c3-bd2a-3d71e15f9585"),
@@ -267,7 +272,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5eb1fdf3-a2c4-4fb1-b092-afb34fc5a4aa"),
+                            Id = new Guid("8aedc5aa-53bc-41ac-9463-fed8acadb4a5"),
                             Age = 1000,
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -324,7 +329,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("38c6c10a-83f8-418f-9115-4ec657214252"),
+                            Id = new Guid("623a29c5-a1ab-4c3c-a777-18885ee1733b"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Episode 1description",
@@ -627,11 +632,29 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Forename")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("GenderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ProfileImageUri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -646,7 +669,25 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GenderId");
+
                     b.ToTable("Users", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("048dc3fd-ded8-4229-8866-c67b0056432b"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(1997, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Forename = "Ashley",
+                            GenderId = new Guid("9c76b669-f696-478c-8c34-6ac5144526f7"),
+                            IsDeleted = false,
+                            ProfileImageUri = "https://scontent.flba1-1.fna.fbcdn.net/v/t39.30808-6/484540404_4716230151849277_3714616557787013077_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=GK8Z13XFJmAQ7kNvwFh6JOH&_nc_oc=AdnHoV-enVocHveEBZz3gEq8yHiuApR-KG1_wMu6TRrvH1wurmSQ5bd3tFz-B0dIfre1DeKtGXOqO2TB9EmBFcnj&_nc_zt=23&_nc_ht=scontent.flba1-1.fna&_nc_gid=virFvoFsPT0mfdVL2wjV2Q&oh=00_AYFvaMOOTNn1JFuThUyB1Zd-0RP6Lzx5T8SD7IDlnvZv5Q&oe=67F4BB63",
+                            Surname = "Colman",
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Username = "Ashley"
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.ViewerRating", b =>
@@ -733,9 +774,9 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ce9991e3-f300-48be-b5eb-7465cbb3fd1c"),
+                            Id = new Guid("2e17a631-e210-432e-8f0c-d49316422087"),
                             AnimeId = new Guid("4aff0276-f322-42ec-b75b-f64851ecfc5e"),
-                            CharacterId = new Guid("5eb1fdf3-a2c4-4fb1-b092-afb34fc5a4aa"),
+                            CharacterId = new Guid("8aedc5aa-53bc-41ac-9463-fed8acadb4a5"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
@@ -784,11 +825,11 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a9c6393b-166a-481b-8c8b-c99d2c3d127c"),
+                            Id = new Guid("d776c1eb-1e68-4175-b29a-a32a5278cc8f"),
                             AnimeId = new Guid("4aff0276-f322-42ec-b75b-f64851ecfc5e"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EpisodeId = new Guid("38c6c10a-83f8-418f-9115-4ec657214252"),
+                            EpisodeId = new Guid("623a29c5-a1ab-4c3c-a777-18885ee1733b"),
                             IsDeleted = false,
                             UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -834,7 +875,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c186a612-6fe3-4428-a44f-42ff59c18965"),
+                            Id = new Guid("cd6a135a-da3d-4347-a822-88787037b8e4"),
                             AnimeId = new Guid("4aff0276-f322-42ec-b75b-f64851ecfc5e"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -884,7 +925,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0746258c-aac3-40e7-8247-1fab6e038822"),
+                            Id = new Guid("71212c3f-19b7-43aa-bd3c-63b036772f2a"),
                             AnimeId = new Guid("4aff0276-f322-42ec-b75b-f64851ecfc5e"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -934,7 +975,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0a3cc2fb-69c5-4aae-ac5e-76253b0d9959"),
+                            Id = new Guid("b5d1d993-a864-4ea8-8d75-c41180a28e70"),
                             AnimeId = new Guid("4aff0276-f322-42ec-b75b-f64851ecfc5e"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -984,7 +1025,7 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7caf0ffa-78f1-4933-a97c-3f8f45a266b5"),
+                            Id = new Guid("a0b7ef38-8992-45f2-87d9-f2fc83788425"),
                             AnimeId = new Guid("4aff0276-f322-42ec-b75b-f64851ecfc5e"),
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1030,6 +1071,18 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserAnimeFavourites", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f7d4be07-cefc-48d1-b052-3a3e017ecacb"),
+                            AnimeId = new Guid("4aff0276-f322-42ec-b75b-f64851ecfc5e"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            UserId = new Guid("048dc3fd-ded8-4229-8866-c67b0056432b")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.UserAnimeRatings", b =>
@@ -1071,6 +1124,19 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserAnimeRatings", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1cc0046d-3ec6-481d-9a6d-4ec9cf0a3bc9"),
+                            AnimeId = new Guid("4aff0276-f322-42ec-b75b-f64851ecfc5e"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Rating = (byte)100,
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            UserId = new Guid("048dc3fd-ded8-4229-8866-c67b0056432b")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.JoinEntity.UserCharacterFavourites", b =>
@@ -1114,6 +1180,18 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserCharacterFavourites", "App");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9ab33b77-5795-4649-bac3-67c3328a5c1e"),
+                            CharacterId = new Guid("8aedc5aa-53bc-41ac-9463-fed8acadb4a5"),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            UpdatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            UserId = new Guid("048dc3fd-ded8-4229-8866-c67b0056432b")
+                        });
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Anime", b =>
@@ -1157,6 +1235,16 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                         .WithMany("Characters")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gender");
+                });
+
+            modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.User", b =>
+                {
+                    b.HasOne("MikuBlazor.Domain.Anime.Entity.Gender", "Gender")
+                        .WithMany("Users")
+                        .HasForeignKey("GenderId")
                         .IsRequired();
 
                     b.Navigation("Gender");
@@ -1287,7 +1375,6 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasOne("MikuBlazor.Domain.Anime.Entity.User", "User")
                         .WithMany("AnimeFavourites")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Anime");
@@ -1306,7 +1393,6 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasOne("MikuBlazor.Domain.Anime.Entity.User", "User")
                         .WithMany("AnimeRatings")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Anime");
@@ -1329,7 +1415,6 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
                     b.HasOne("MikuBlazor.Domain.Anime.Entity.User", "User")
                         .WithMany("CharacterFavourites")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Character");
@@ -1359,6 +1444,8 @@ namespace MikuBlazor.Persistence.EntityFrameworkCore.Migrations
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Gender", b =>
                 {
                     b.Navigation("Characters");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("MikuBlazor.Domain.Anime.Entity.Season", b =>

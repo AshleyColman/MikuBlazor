@@ -23,12 +23,12 @@ public class UserRepository(IDbContextFactory<AppDbContext> dbContextFactory)
 
         query = SetAsTracking(query, asTracking);
 
-        query = SetDataGroups(query, dataGroups);
+        // query = SetDataGroups(query, dataGroups);
 
         IEnumerable<User> querySelect = SetSelect(query, select);
         
         User? entity = querySelect.FirstOrDefault(x => x.Id == id);
-
+        
         return entity;
     }
 

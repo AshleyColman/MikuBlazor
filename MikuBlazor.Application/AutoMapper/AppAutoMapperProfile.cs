@@ -1,11 +1,15 @@
 
+using MikuBlazor.DTO.Responses.GetAnime;
+using MikuBlazor.DTO.Responses.GetProfile;
+using AnimeResponse = MikuBlazor.DTO.Responses.GetAnime.AnimeResponse;
+
 namespace MikuBlazor.Application.AutoMapper;
 
 public class AppAutoMapperProfile : global::AutoMapper.Profile
 {
     public AppAutoMapperProfile()
     {
-        CreateMap<Domain.Anime.Entity.Anime, DTO.Requests.GetAnime.AnimeResponse>()
+        CreateMap<Domain.Anime.Entity.Anime, AnimeResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.JapaneseTitle, opt => opt.MapFrom(y => y.JapaneseTitle))
             .ForMember(x => x.Rating, opt => opt.MapFrom(y => y.Rating))
@@ -23,68 +27,72 @@ public class AppAutoMapperProfile : global::AutoMapper.Profile
             .ForMember(x => x.Season, opt => opt.MapFrom(y => y.Season))
             .ForMember(x => x.Genres, opt => opt.MapFrom(y => y.Genres));
 
-        CreateMap<Domain.Anime.Entity.AnimeStatus, DTO.Requests.GetAnime.AnimeStatusResponse>()
+        CreateMap<Domain.Anime.Entity.AnimeStatus, AnimeStatusResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
         
-        CreateMap<Domain.Anime.Entity.AnimeType, DTO.Requests.GetAnime.AnimeTypeResponse>()
+        CreateMap<Domain.Anime.Entity.AnimeType, AnimeTypeResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
        
-        CreateMap<Domain.Anime.Entity.Season, DTO.Requests.GetAnime.SeasonResponse>()
+        CreateMap<Domain.Anime.Entity.Season, SeasonResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
 
-        CreateMap<Domain.Anime.Entity.ViewerRating, DTO.Requests.GetAnime.ViewerRatingResponse>()
+        CreateMap<Domain.Anime.Entity.ViewerRating, ViewerRatingResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
 
-        CreateMap<Domain.Anime.Entity.Episode, DTO.Requests.GetAnime.EpisodeResponse>()
+        CreateMap<Domain.Anime.Entity.Episode, EpisodeResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Title, opt => opt.MapFrom(y => y.Title))
             .ForMember(x => x.Description, opt => opt.MapFrom(y => y.Description))
             .ForMember(x => x.Number, opt => opt.MapFrom(y => y.Number));
 
-        CreateMap<Domain.Anime.Entity.Producer, DTO.Requests.GetAnime.ProducerResponse>()
+        CreateMap<Domain.Anime.Entity.Producer, ProducerResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
        
-        CreateMap<Domain.Anime.Entity.Tag, DTO.Requests.GetAnime.TagResponse>()
+        CreateMap<Domain.Anime.Entity.Tag, TagResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
 
-        CreateMap<Domain.Anime.Entity.Studio, DTO.Requests.GetAnime.StudioResponse>()
+        CreateMap<Domain.Anime.Entity.Studio, StudioResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
 
-        CreateMap<Domain.Anime.Entity.Season, DTO.Requests.GetAnime.SeasonResponse>()
+        CreateMap<Domain.Anime.Entity.Season, SeasonResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
 
-        CreateMap<Domain.Anime.Entity.Genre, DTO.Requests.GetAnime.GenreResponse>()
+        CreateMap<Domain.Anime.Entity.Genre, GenreResponse>()
             .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
             .ForMember(x => x.Name, opt => opt.MapFrom(y => y.Name));
 
-        CreateMap<Domain.Anime.Entity.User, DTO.Requests.GetProfile.ProfileResponse>()
+        CreateMap<Domain.Anime.Entity.User, ProfileResponse>()
             .ForMember(x => x.Username, opt => opt.MapFrom(y => y.Username))
             .ForMember(x => x.Forename, opt => opt.MapFrom(y => y.Forename))
             .ForMember(x => x.Surname, opt => opt.MapFrom(y => y.Surname))
             .ForMember(x => x.DateOfBirth, opt => opt.MapFrom(y => y.DateOfBirth))
-            .ForMember(x => x.Gender, opt => opt.MapFrom(y => y.Gender))
+            .ForMember(x => x.Gender, opt => opt.MapFrom(y => y.Gender.Name))
             .ForMember(x => x.AnimeFavourites, opt => opt.MapFrom(y => y.AnimeFavourites))
             .ForMember(x => x.AnimeRatings, opt => opt.MapFrom(y => y.AnimeRatings));
 
-        CreateMap<Domain.Anime.JoinEntity.UserCharacterFavourites, DTO.Requests.GetProfile.CharacterFavouriteResponse>()
-            .ForMember(x => x.CharacterId, opt => opt.MapFrom(y => y.Id))
-            .ForMember(x => x.Character, opt => opt.MapFrom(y => y.Character));
-
-        CreateMap<Domain.Anime.JoinEntity.UserAnimeFavourites, DTO.Requests.GetProfile.AnimeFavouriteResponse>()
-            .ForMember(x => x.AnimeId, opt => opt.MapFrom(y => y.AnimeId))
-            .ForMember(x => x.Anime, opt => opt.MapFrom(y => y.Anime));
-
-        CreateMap<Domain.Anime.JoinEntity.UserAnimeRatings, DTO.Requests.GetProfile.AnimeRatingResponse>()
-            .ForMember(x => x.Anime, opt => opt.MapFrom(y => y.Anime))
-            .ForMember(x => x.AnimeId, opt => opt.MapFrom(y => y.AnimeId))
+        CreateMap<Domain.Anime.JoinEntity.UserAnimeRatings, AnimeRatingResponse>()
+            .ForMember(x => x.AnimeId, opt => opt.MapFrom(y => y.Anime.Id))
+            .ForMember(x => x.ImageUri, opt => opt.MapFrom(y => y.Anime.ImageUri))
             .ForMember(x => x.Rating, opt => opt.MapFrom(y => y.Rating));
+
+        CreateMap<Domain.Anime.JoinEntity.UserAnimeFavourites, AnimeFavouriteResponse>()
+            .ForMember(x => x.AnimeId, opt => opt.MapFrom(y => y.Anime.Id))
+            .ForMember(x => x.ImageUri, opt => opt.MapFrom(y => y.Anime.ImageUri));
+        
+        CreateMap<Domain.Anime.JoinEntity.UserCharacterFavourites, DTO.Responses.GetProfile.CharacterFavouriteResponse>()
+            .ForMember(x => x.CharacterId, opt => opt.MapFrom(y => y.Id))
+            .ForMember(x => x.FirstName, opt => opt.MapFrom(y => y.Character.FirstName))
+            .ForMember(x => x.LastName, opt => opt.MapFrom(y => y.Character.LastName))
+            .ForMember(x => x.NickName, opt => opt.MapFrom(y => y.Character.NickName))
+            .ForMember(x => x.ImageUri, opt => opt.MapFrom(y => y.Character.ImageUri))
+            .ForMember(x => x.ImageUri, opt => opt.MapFrom(y => y.Character.ImageUri));
     }
 }

@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MikuBlazor.Application.Character.Queries;
-using MikuBlazor.DTO.Requests.GetCharacter;
+using MikuBlazor.DTO.Responses.GetCharacter;
 
 namespace MikuBlazor.Controllers;
 

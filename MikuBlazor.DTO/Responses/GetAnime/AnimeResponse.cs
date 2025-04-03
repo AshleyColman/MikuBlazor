@@ -1,4 +1,4 @@
-namespace MikuBlazor.DTO.Requests.GetAnime;
+namespace MikuBlazor.DTO.Responses.GetAnime;
 
 public sealed class AnimeResponse
 {
@@ -9,9 +9,10 @@ public sealed class AnimeResponse
     public UInt16 Rank { get; init; }
     public DateTime? StartDate { get; init; }
     public DateTime? EndDate { get; init; }
+    public string ImageUri { get; init; } = null!;
     public IReadOnlyList<EpisodeResponse> Episodes { get; set; } = [];
     public AnimeTypeResponse Type { get; init; } = null!;
-    public AnimeStatusResponse Status { get; set; } = null!;
+    public AnimeStatusResponse Status { get; init; } = null!;
     public IReadOnlyList<ProducerResponse> Producers = [];
     public IReadOnlyList<TagResponse> Tags { get; init; } = [];
     public IReadOnlyList<StudioResponse> Studio { get; init; } = [];

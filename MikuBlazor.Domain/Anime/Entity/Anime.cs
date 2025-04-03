@@ -16,6 +16,7 @@ public sealed class Anime : Entity
     public DateTime? EndDate { get; set; }
     public Guid SeasonId { get; set; }
     public Guid ViewerRatingId { get; set; }
+    public string ImageUri { get; set; } = null!;
     
     public AnimeStatus Status { get; set; } = null!;
     public AnimeType Type { get; set; } = null!;

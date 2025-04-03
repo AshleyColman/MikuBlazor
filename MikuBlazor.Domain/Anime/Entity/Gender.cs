@@ -5,4 +5,5 @@ public class Gender : Entity
     public string Name { get; set; } = null!;
 
     public IList<Character> Characters { get; set; } = [];
+    public IList<User> Users { get; set; } = [];
 }

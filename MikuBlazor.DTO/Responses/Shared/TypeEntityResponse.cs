@@ -1,4 +1,4 @@
-namespace MikuBlazor.DTO.Requests.Shared;
+namespace MikuBlazor.DTO.Responses.Shared;
 
 public abstract class TypeEntityResponse
 {

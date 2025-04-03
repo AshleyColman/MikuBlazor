@@ -9,6 +9,7 @@ public sealed class User : Entity
     public string Surname { get; set; } = null!;
     public Guid GenderId { get; set; }
     public DateTime DateOfBirth { get; set; }
+    public string ProfileImageUri { get; set; } = null!;
 
     public Gender Gender { get; set; } = null!;
     public IList<UserAnimeFavourites> AnimeFavourites { get; set; } = [];

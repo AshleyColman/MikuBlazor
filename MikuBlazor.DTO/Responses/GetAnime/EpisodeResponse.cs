@@ -1,4 +1,4 @@
-namespace MikuBlazor.DTO.Requests.GetAnime;
+namespace MikuBlazor.DTO.Responses.GetAnime;
 
 public sealed class EpisodeResponse
 {

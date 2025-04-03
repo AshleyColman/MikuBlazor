@@ -18,6 +18,7 @@ public static class Projections
     {
         return x => new User
         {
+            Id = x.Id,
             Username = x.Username,
             Forename = x.Forename,
             Surname = x.Surname,
@@ -34,6 +35,10 @@ public static class Projections
             {
                 Id = af.Id,
                 AnimeId = af.AnimeId,
+                Anime = new Domain.Anime.Entity.Anime
+                {
+                    ImageUri = af.Anime.ImageUri,
+                },
                 UserId = af.UserId
             }).ToList(),
             
@@ -41,6 +46,11 @@ public static class Projections
             {
                 Id = ar.Id,
                 AnimeId = ar.AnimeId,
+                Anime = new Domain.Anime.Entity.Anime
+                {
+                    ImageUri = ar.Anime.ImageUri
+                },
+                Rating = ar.Rating,
                 UserId = ar.UserId
             }).ToList(),
             
@@ -48,6 +58,13 @@ public static class Projections
             {
                 Id = cf.Id,
                 UserId = cf.UserId,
+                Character = new Domain.Anime.Entity.Character
+                {
+                    FirstName = cf.Character.FirstName,
+                    LastName = cf.Character.LastName,
+                    NickName = cf.Character.NickName,
+                    ImageUri = cf.Character.ImageUri
+                },
                 CharacterId = cf.CharacterId
             }).ToList()
         };

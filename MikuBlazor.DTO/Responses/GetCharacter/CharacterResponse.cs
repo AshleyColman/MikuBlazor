@@ -1,4 +1,4 @@
-namespace MikuBlazor.DTO.Requests.GetCharacter;
+namespace MikuBlazor.DTO.Responses.GetCharacter;
 
 public class CharacterResponse
 {
